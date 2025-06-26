@@ -23,7 +23,7 @@ const faqData = [
     answer: 'Assim que você finalizar a compra, receberemos um e-mail com a confirmação e entraremos em contato usando os dados fornecidos. Conversaremos com você e marcaremos a entrega dos produtos.'
   },
   {
-    question: 'Teve algum problema?',
+    question: 'Tive um problema, e agora?',
     answer: 'Se houver qualquer problema com a entrega dos itens, entre em contato imediatamente com nossa equipe de suporte. Resolveremos o problema o mais rápido possível.'
   },
   {
