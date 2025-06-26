@@ -1,14 +1,89 @@
+.home-container {
+  text-align: center;
+  margin-top: 60px;
+  font-family: Arial, sans-serif;
+}
+
+.home-hero {
+  position: relative;
+}
+
+/* Imagem de fundo/banner */
 .home-banner {
   width: 100%;
   max-height: 400px;
   object-fit: cover;
-  margin-top: 60px;
-  margin-bottom: 2rem;
-  border-bottom: 2px solid #ccc;
+  display: block;
+  object-position: center 30%;
 }
+
+/* Botão sobreposto à imagem */
+.btn-loja {
+  width: 50%;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #1c7c44cb;
+  color: white;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: 2px solid #a9d8bc;
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 2;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: 
+    background-color 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* Efeito de reflexo (shine) */
+.btn-loja::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-20deg);
+  animation: shine 2s infinite;
+}
+
+@keyframes shine {
+  0% {
+    left: -75%;
+  }
+  100% {
+    left: 125%;
+  }
+}
+
+.btn-loja:hover {
+  background-color: #114e2b;
+  transform: translateX(-50%) scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+
 
 @media (max-width: 600px) {
   .home-banner {
     margin-top: 100px;
+  }
+
+  .btn-loja {
+    width: 80%;
   }
 }
