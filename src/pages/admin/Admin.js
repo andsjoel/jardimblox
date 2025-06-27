@@ -1,25 +1,29 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { auth, signInWithEmailAndPassword } from '../../service/firebase'
-import './admin.css'
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './admin.css';
+import { account } from '../../service/appwrite';
+
 
 const Admin = () => {
-  const [email, setEmail] = useState('')
-  const [senha, setSenha] = useState('')
-  const [erro, setErro] = useState(null)
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+  const [erro, setErro] = useState(null);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
-    e.preventDefault()
-    setErro(null)
+    e.preventDefault();
 
     try {
-      await signInWithEmailAndPassword(auth, email, senha)
-      navigate('/painel') // ou outro caminho do admin
-    } catch (err) {
-      setErro('Credenciais inválidas.')
+      await account.createEmailPasswordSession(email, senha);
+      navigate('/admin/painel');
+      
+    } catch (error) {
+      setErro('Credenciais inválidas.');
+      console.log(error);
+      
     }
+
   }
 
   return (
@@ -51,4 +55,4 @@ const Admin = () => {
   )
 }
 
-export default Admin
+export default Admin;

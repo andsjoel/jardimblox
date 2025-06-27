@@ -1,19 +1,20 @@
-// Importa o SDK do Firebase
 import { initializeApp } from 'firebase/app'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import { getFirestore } from 'firebase/firestore'
+import { getStorage } from 'firebase/storage'
 
-// 🔧 Substitua com os dados do seu projeto Firebase
 const firebaseConfig = {
-  apiKey: "SUA_API_KEY",
-  authDomain: "SEU_DOMINIO.firebaseapp.com",
-  projectId: "SEU_PROJECT_ID",
-  storageBucket: "SEU_BUCKET.appspot.com",
-  messagingSenderId: "SEU_SENDER_ID",
-  appId: "SUA_APP_ID"
-}
+  apiKey: "AIzaSyDHHsvC4goyELBnBjE5m6Z5IBkR5NqcWew",
+  authDomain: "jardimblox-c8709.firebaseapp.com",
+  projectId: "jardimblox-c8709",
+  storageBucket: "jardimblox-c8709.firebasestorage.app",
+  messagingSenderId: "566464208551",
+  appId: "1:566464208551:web:318d3c6916eb01cda4c582"
+};
 
-// Inicializa o Firebase
 const app = initializeApp(firebaseConfig)
 const auth = getAuth(app)
+const db = getFirestore(app)
+const storage = getStorage()
 
-export { auth, signInWithEmailAndPassword }
+export { auth, signInWithEmailAndPassword, db, storage  }
