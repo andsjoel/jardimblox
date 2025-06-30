@@ -1,7 +1,7 @@
 import { FaSignOutAlt } from 'react-icons/fa'; // Ícone de logout do FontAwesome
 import { account } from '../../service/appwrite'; // Importando a instância do Appwrite
 import { useNavigate } from 'react-router-dom';
-
+import './sidebar.css'
 
 const Sidebar = ({ setAbaAtiva, abaAtiva }) => {
   const navigate = useNavigate(); // Hook para navegação
