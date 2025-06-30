@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './produtos.css';
 import { databases, storage, ID } from '../../service/appwrite';
+import ProdutoCard from '../productCard/productCard';
 
 const Produtos = () => {
   const [produtos, setProdutos] = useState([]);
@@ -9,24 +10,30 @@ const Produtos = () => {
     imagem: null, descricaoCurta: '', descricaoCompleta: ''
   });
   const [uploading, setUploading] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(true); // Para controle de acesso
+  const [expandedCard, setExpandedCard] = useState(null); // Controla o card expandido
+  const [editId, setEditId] = useState(null);
 
   const DATABASE_ID = '685ea6600023735f334e';
   const COLLECTION_ID = '685ea67f002bae8cf723';
   const BUCKET_ID = '685ea83a00220341283a';
 
-const fetchProdutos = async () => {
-  try {
-    // Certifique-se de que a ID do banco de dados e da coleção estejam corretas
-    const res = await databases.listDocuments(DATABASE_ID, COLLECTION_ID);
-    setProdutos(res.documents);
-  } catch (error) {
-    console.error('Erro ao buscar produtos:', error);
-  }
-};
+  const fetchProdutos = async () => {
+    try {
+      const res = await databases.listDocuments(DATABASE_ID, COLLECTION_ID);
+      setProdutos(res.documents);
+    } catch (error) {
+      console.error('Erro ao buscar produtos:', error);
+    }
+  };
 
-  useEffect(() => {
-    fetchProdutos();
-  }, []);
+  const handleCardClickOutside = () => {
+    setExpandedCard(null);
+  };
+
+  const handleCardClick = (productId) => {
+    setExpandedCard(prevId => (prevId === productId ? null : productId));
+  };
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -37,106 +44,201 @@ const fetchProdutos = async () => {
     }
   };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  setUploading(true);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setUploading(true);
 
-  let imageUrl = '';
+    let imageUrl = '';
 
-  if (form.imagem) {
-    try {
-      // Cria o arquivo no Appwrite Storage
-      const file = await storage.createFile(BUCKET_ID, ID.unique(), form.imagem);
-      console.log('Arquivo carregado com sucesso:', file);
-
-      // Gera a URL da imagem dinamicamente
-      imageUrl = generateImageUrl(file.$id);
-      console.log('URL da Imagem gerada:', imageUrl);
-    } catch (uploadError) {
-      console.error('Erro ao fazer upload da imagem:', uploadError);
-      setUploading(false);
-      return;
-    }
-  }
-
-  // Adiciona o produto ao banco de dados
-  try {
-    const document = await databases.createDocument(
-      DATABASE_ID,
-      COLLECTION_ID,
-      ID.unique(), // ID único do produto
-      {
-        nome: form.nome,
-        preco: Number(form.preco),
-        estoque: Number(form.estoque),
-        imagem: imageUrl, // Salva a URL gerada
-        descricaoCurta: form.descricaoCurta,
-        descricaoCompleta: form.descricaoCompleta,
-        criadoEm: new Date().toISOString()
+    if (form.imagem && typeof form.imagem !== 'string') {
+      try {
+        const file = await storage.createFile(BUCKET_ID, ID.unique(), form.imagem);
+        imageUrl = generateImageUrl(file.$id);
+      } catch (uploadError) {
+        console.error('Erro ao fazer upload da imagem:', uploadError);
+        setUploading(false);
+        return;
       }
-    );
-    console.log('Produto adicionado:', document);
+    } else if (typeof form.imagem === 'string') {
+      imageUrl = form.imagem; // já é a imagem antiga, mantém
+    }
 
-    // Limpa o formulário após o sucesso
+    try {
+      if (editId) {
+        // Atualizar produto existente
+        await databases.updateDocument(
+          DATABASE_ID,
+          COLLECTION_ID,
+          editId,
+          {
+            nome: form.nome,
+            preco: parseFloat(form.preco.replace(',', '.')),
+            estoque: Number(form.estoque),
+            imagem: imageUrl || form.imagem, // mantém imagem existente se não for atualizada
+            descricaoCurta: form.descricaoCurta,
+            descricaoCompleta: form.descricaoCompleta
+          }
+        );
+      } else {
+        // Criar novo produto
+        await databases.createDocument(
+          DATABASE_ID,
+          COLLECTION_ID,
+          ID.unique(),
+          {
+            nome: form.nome,
+            preco: parseFloat(form.preco.replace(',', '.')),
+            estoque: Number(form.estoque),
+            imagem: imageUrl,
+            descricaoCurta: form.descricaoCurta,
+            descricaoCompleta: form.descricaoCompleta,
+            criadoEm: new Date().toISOString()
+          }
+        );
+      }
+
+      console.log('Produto adicionado:', document);
+
+      setForm({
+        nome: '',
+        preco: '',
+        estoque: '',
+        imagem: null,
+        descricaoCurta: '',
+        descricaoCompleta: ''
+      });
+      setUploading(false);
+      fetchProdutos();  // Recarrega a lista de produtos
+    } catch (error) {
+      console.error('Erro ao adicionar produto:', error);
+      setUploading(false);
+    }
+
+    setEditId(null);
+  };
+
+  const generateImageUrl = (fileId) => {
+    const APPWRITE_ENDPOINT = "https://nyc.cloud.appwrite.io";
+    const BUCKET_ID = "685ea83a00220341283a";
+    const PROJECT_ID = "685de4f1000ea5dc2d4d";
+    const MODE = "admin"; // Modo de acesso do arquivo
+
+    return `${APPWRITE_ENDPOINT}/v1/storage/buckets/${BUCKET_ID}/files/${fileId}/view?project=${PROJECT_ID}&mode=${MODE}`;
+  };
+
+  useEffect(() => {
+    fetchProdutos();
+  }, []);
+
+  const handleDelete = async (id) => {
+    console.log('aaaa')
+    const confirm = window.confirm('Tem certeza que deseja excluir este produto?');
+    if (!confirm) return;
+
+    try {
+      await databases.deleteDocument(DATABASE_ID, COLLECTION_ID, id);
+        setProdutos(prev => prev.filter(prod => prod.$id !== id));
+      } catch (error) {
+        console.error('Erro ao excluir produto:', error);
+    }
+  };
+
+  const handleEdit = (produto) => {
     setForm({
-      nome: '',
-      preco: '',
-      estoque: '',
-      imagem: null,
-      descricaoCurta: '',
-      descricaoCompleta: ''
+      nome: produto.nome,
+      preco: produto.preco,
+      estoque: produto.estoque,
+      imagem: produto.imagem,
+      descricaoCurta: produto.descricaoCurta,
+      descricaoCompleta: produto.descricaoCompleta,
     });
+    setEditId(produto.$id);
+  };
 
-    setUploading(false);
-    fetchProdutos();  // Recarrega a lista de produtos
-  } catch (error) {
-    console.error('Erro ao adicionar produto:', error);
-    setUploading(false);
-  }
-};
+  const handlePrecoChange = (e) => {
+    const rawValue = e.target.value.replace(/\D/g, ''); // remove tudo que não é número
+    const floatValue = (Number(rawValue) / 100).toFixed(2); // divide por 100 para colocar vírgula
 
-const generateImageUrl = (fileId) => {
-  const APPWRITE_ENDPOINT = "https://nyc.cloud.appwrite.io"; // Endpoint correto
-  const BUCKET_ID = "685ea83a00220341283a"; // ID do bucket
-  const PROJECT_ID = "685de4f1000ea5dc2d4d"; // ID do projeto
-  const MODE = "admin"; // Ou "admin", dependendo do acesso desejado
+    const formatted = floatValue
+      .toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+      })
+      .replace('R$', '') // remove o R$ do campo, pode manter se quiser
+      .trim();
 
-  return `${APPWRITE_ENDPOINT}/v1/storage/buckets/${BUCKET_ID}/files/${fileId}/view?project=${PROJECT_ID}&mode=${MODE}`;
-};
-
-
+    setForm(prev => ({
+      ...prev,
+      preco: formatted,
+    }));
+  };
 
   return (
     <div className="produtos-container">
-      <h2>Adicionar Novo Produto</h2>
+      <h2>Cadastrar Produto</h2>
 
       <form className="produto-form" onSubmit={handleSubmit}>
-        <input
-          type="text" name="nome" placeholder="Nome"
-          value={form.nome} onChange={handleChange} required
-        />
-        <input
-          type="number" name="preco" placeholder="Preço"
-          value={form.preco} onChange={handleChange} required
-        />
-        <input
-          type="number" name="estoque" placeholder="Estoque"
-          value={form.estoque} onChange={handleChange} required
-        />
-        <input
-          type="file" name="imagem" accept="image/*"
-          onChange={handleChange} required
-        />
-        <input
-          type="text" name="descricaoCurta" placeholder="Descrição Curta"
-          value={form.descricaoCurta} onChange={handleChange} required
-        />
-        <textarea
-          name="descricaoCompleta" placeholder="Descrição Completa"
-          value={form.descricaoCompleta} onChange={handleChange} required
-        />
+        <div className="imagem-container">
+          <input
+            type="file"
+            name="imagem"
+            accept="image/*"
+            onChange={handleChange}
+            required={!editId}
+          />
+          <div className="preview-imagem">
+          {form.imagem && (
+            <img
+              src={typeof form.imagem === 'string' ? form.imagem : URL.createObjectURL(form.imagem)}
+              alt="Pré-visualização"
+            />
+          )}
+          </div>
+        </div>
+
+        <div className="detalhes-produto">
+          <input
+            type="text"
+            name="nome"
+            placeholder="Nome"
+            value={form.nome}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="text"
+            name="preco"
+            placeholder="Preço"
+            value={form.preco}
+            onChange={handlePrecoChange}
+            required
+          />
+          <input
+            type="number"
+            name="estoque"
+            placeholder="Estoque"
+            value={form.estoque}
+            onChange={handleChange}
+            required
+          />
+          <textarea
+            name="descricaoCurta"
+            placeholder="Descrição Curta"
+            value={form.descricaoCurta}
+            onChange={handleChange}
+            required
+          />
+          <textarea
+            name="descricaoCompleta"
+            placeholder="Descrição Completa"
+            value={form.descricaoCompleta}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
         <button type="submit" disabled={uploading}>
-          {uploading ? 'Enviando...' : 'Adicionar Produto'}
+          {uploading ? 'Salvando...' : editId ? 'Salvar Alterações' : 'Adicionar Produto'}
         </button>
       </form>
 
@@ -146,17 +248,16 @@ const generateImageUrl = (fileId) => {
       ) : (
         <div className="lista-produtos">
           {produtos.map(prod => (
-            <div key={prod.$id} className="card-produto">
-              <img src={prod.imagem} alt={prod.nome} />
-              <h3>{prod.nome}</h3>
-              <p><strong>Preço:</strong> R$ {prod.preco}</p>
-              <p><strong>Estoque:</strong> {prod.estoque}</p>
-              <p><strong>Curta:</strong> {prod.descricaoCurta}</p>
-              <details>
-                <summary>Ver Descrição Completa</summary>
-                <p>{prod.descricaoCompleta}</p>
-              </details>
-            </div>
+            <ProdutoCard
+              key={prod.$id}
+              produto={prod}
+              isAdmin={isAdmin}
+              onClickOutside={handleCardClickOutside}
+              isExpanded={expandedCard === prod.$id}
+              onClick={() => handleCardClick(prod.$id)}
+              onDelete={() => handleDelete(prod.$id)}
+              onEdit={() => handleEdit(prod)}
+            />
           ))}
         </div>
       )}
