@@ -7,10 +7,10 @@ const Produtos = () => {
   const [produtos, setProdutos] = useState([]);
   const [form, setForm] = useState({
     nome: '', preco: '', estoque: '',
-    imagem: null, descricaoCurta: '', descricaoCompleta: ''
+    imagem: null, descricao: ''
   });
   const [uploading, setUploading] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(true); // Para controle de acesso
+  const [isAdmin] = useState(true); // Para controle de acesso
   const [expandedCard, setExpandedCard] = useState(null); // Controla o card expandido
   const [editId, setEditId] = useState(null);
 
@@ -75,8 +75,7 @@ const Produtos = () => {
             preco: parseFloat(form.preco.replace(',', '.')),
             estoque: Number(form.estoque),
             imagem: imageUrl || form.imagem, // mantém imagem existente se não for atualizada
-            descricaoCurta: form.descricaoCurta,
-            descricaoCompleta: form.descricaoCompleta
+            descricao: form.descricao
           }
         );
       } else {
@@ -90,8 +89,7 @@ const Produtos = () => {
             preco: parseFloat(form.preco.replace(',', '.')),
             estoque: Number(form.estoque),
             imagem: imageUrl,
-            descricaoCurta: form.descricaoCurta,
-            descricaoCompleta: form.descricaoCompleta,
+            descricao: form.descricao,
             criadoEm: new Date().toISOString()
           }
         );
@@ -104,8 +102,7 @@ const Produtos = () => {
         preco: '',
         estoque: '',
         imagem: null,
-        descricaoCurta: '',
-        descricaoCompleta: ''
+        descricao: ''
       });
       setUploading(false);
       fetchProdutos();  // Recarrega a lista de produtos
@@ -144,13 +141,16 @@ const Produtos = () => {
   };
 
   const handleEdit = (produto) => {
+    console.log(produto.preco);
+
     setForm({
-      nome: produto.nome,
-      preco: produto.preco,
-      estoque: produto.estoque,
-      imagem: produto.imagem,
-      descricaoCurta: produto.descricaoCurta,
-      descricaoCompleta: produto.descricaoCompleta,
+      nome: produto.nome || '',
+      preco: produto.preco !== undefined && produto.preco !== null
+        ? produto.preco.toFixed(2).replace('.', ',')
+        : '',
+      estoque: produto.estoque?.toString() || '',
+      imagem: produto.imagem || null,
+      descricao: produto.descricao || ''
     });
     setEditId(produto.$id);
   };
@@ -222,16 +222,9 @@ const Produtos = () => {
             required
           />
           <textarea
-            name="descricaoCurta"
-            placeholder="Descrição Curta"
-            value={form.descricaoCurta}
-            onChange={handleChange}
-            required
-          />
-          <textarea
-            name="descricaoCompleta"
-            placeholder="Descrição Completa"
-            value={form.descricaoCompleta}
+            name="descricao"
+            placeholder="Descrição"
+            value={form.descricao}
             onChange={handleChange}
             required
           />

@@ -31,14 +31,14 @@ const Header = () => {
     <span>Loja</span>
   </NavLink>
 
-  <NavLink to="/chat" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
+  <NavLink to="/contato" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
     <FaComments className="nav-icon" />
-    <span>Chat</span>
+    <span>Contato</span>
   </NavLink>
 
-  <NavLink to="/carrinho" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
+  <NavLink to="/client" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
     <FaShoppingCart className="nav-icon" />
-    <span>Carrinho</span>
+    <span>Minhas Compras</span>
   </NavLink>
 </nav>
 

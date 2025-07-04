@@ -1,0 +1,132 @@
+/* Estilo para o container principal da página */
+.pedidos-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Estilo para o título da página */
+.pedidos-container h1 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Estilo da barra de pesquisa */
+.search-bar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.search-bar input {
+  padding: 8px;
+  font-size: 16px;
+  width: 250px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.search-button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  margin-left: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.search-button:hover {
+  background-color: #45a049;
+}
+
+/* Estilos para a tabela de pedidos */
+.pedidos-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  border: 1px solid #ddd;
+}
+
+.pedidos-table th,
+.pedidos-table td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.pedidos-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.pedidos-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Estilos para a célula de "Entregue" */
+.pedidos-table td button {
+  background-color: green;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.pedidos-table td button:hover {
+  background-color: darkgreen;
+}
+
+/* Estilo para os ícones de confirmação */
+.pedidos-table td svg {
+  cursor: pointer;
+  color: green;
+  font-size: 20px;
+}
+
+.pedidos-table td svg:hover {
+  color: darkgreen;
+}
+
+/* Estilo para as células de e-mail */
+.pedidos-table td {
+  font-size: 14px;
+}
+
+/* Estilo geral da página */
+.pedidos-container {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Tabelas responsivas para dispositivos menores */
+@media screen and (max-width: 768px) {
+  .pedidos-table th,
+  .pedidos-table td {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .search-bar input {
+    width: 200px;
+  }
+
+  .search-button {
+    padding: 6px 10px;
+  }
+}
+
+.status-processando {
+  background-color: #1e90ff; /* Azul claro */
+}
+
+.status-entregue {
+  background-color: #32cd32; /* Verde claro */
+}
+
+.status-outro {
+  background-color: #ff6347; /* Vermelho claro */
+}

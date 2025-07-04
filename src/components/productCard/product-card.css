@@ -3,14 +3,20 @@
   padding: 1rem;
   border-radius: 8px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease, max-height 0.3s ease;
   overflow: hidden;
-  max-height: 250px; /* altura padrão do card */
+  max-height: 240px;
+  width: 100%;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease, max-height 0.3s ease;
+  cursor: pointer;
 }
 
 .card-produto.expandido {
-  max-height: 600px; /* altura quando expandido */
-  transform: scale(1.05); /* suaviza a expansão */
+  max-height: 600px;
+  transform: scale(1.02);
 }
 
 .card-produto img {
@@ -26,8 +32,22 @@
   font-size: 1.1rem;
 }
 
+.card-produto .preco {
+  font-weight: bold;
+  color: #27ae60;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
 .card-produto .descricao-completa {
   margin-top: 1rem;
+}
+
+.estoque {
+  font-size: 0.9rem;
+  color: #666;
+  /* margin-top: -0.5rem; */
+  margin-bottom: 0.5rem;
 }
 
 .card-produto .actions {

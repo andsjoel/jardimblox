@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './product-card.css';
 
 const ProdutoCard = ({ produto, isAdmin, onClickOutside, isExpanded, onClick, onDelete, onEdit }) => {
   const [isVisible, setIsVisible] = useState(isExpanded);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     setIsVisible(isExpanded);
@@ -27,13 +30,23 @@ const ProdutoCard = ({ produto, isAdmin, onClickOutside, isExpanded, onClick, on
           currency: 'BRL'
         }).format(produto.preco)}
       </p>
-      <p><strong>Estoque:</strong> {produto.estoque}</p>
-      <p><strong>Curta:</strong> {produto.descricaoCurta}</p>
+      {isAdmin && <p className="estoque">Estoque: {produto.estoque}</p>}
+      {!isAdmin && <p><strong>Curta:</strong> {produto.descricao}</p>}
 
       {isVisible && (
         <div className="descricao-completa">
-          <p><strong>Descrição Completa:</strong> {produto.descricaoCompleta}</p>
-          {!isAdmin && <button className="comprar-agora">Comprar Agora</button>}
+          {isAdmin && <p><strong>Descrição:</strong> {produto.descricao}</p>}
+          {!isAdmin && (
+            <button
+              className="comprar-agora"
+              onClick={(e) => {
+                e.stopPropagation(); // para não expandir de novo
+                navigate(`/produto/${produto.$id}`);
+              }}
+            >
+              Comprar Agora
+            </button>
+          )}
           {isAdmin && (
             <div className="actions">
               <button className="editar" onClick={(e) => {
