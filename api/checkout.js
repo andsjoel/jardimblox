@@ -1,4 +1,3 @@
-// /api/checkout.js
 import mercadopago from 'mercadopago';
 
 mercadopago.configure({
@@ -10,31 +9,36 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Método não permitido' });
   }
 
-  try {
-    const { title, quantity, price } = req.body;
+  const { title, quantity, price } = req.body;
 
+  if (!title || !quantity || !price) {
+    return res.status(400).json({ error: 'Dados incompletos' });
+  }
+
+  const origin = req.headers.origin || 'https://jardimblox.vercel.app'; // fallback seguro
+
+  try {
     const preference = {
       items: [
         {
           title,
           quantity,
+          unit_price: Number(price),
           currency_id: 'BRL',
-          unit_price: parseFloat(price)
-        }
+        },
       ],
       back_urls: {
-        success: 'https://seusite.com/sucesso',
-        failure: 'https://seusite.com/erro',
-        pending: 'https://seusite.com/pendente'
+        success: `${origin}/sucesso`,
+        failure: `${origin}/erro`,
+        pending: `${origin}/pendente`,
       },
-      auto_return: 'approved'
+      auto_return: 'approved',
     };
 
-    const response = await mercadopago.preferences.create(preference);
-    return res.status(200).json({ init_point: response.body.init_point });
-
-  } catch (error) {
-    console.error('Erro no checkout:', error);
-    return res.status(500).json({ error: 'Erro ao iniciar pagamento' });
+    const result = await mercadopago.preferences.create(preference);
+    return res.status(200).json({ init_point: result.body.init_point });
+  } catch (err) {
+    console.error('Erro ao criar preferência:', err);
+    return res.status(500).json({ error: 'Erro ao criar preferência' });
   }
 }

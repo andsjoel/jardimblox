@@ -43,31 +43,32 @@ const ProductDetail = () => {
   }, [id]);
 
     // Função que chama a API backend para criar preferência Mercado Pago
-  const iniciarCheckoutMercadoPago = async () => {
-    try {
-      const response = await fetch('/api/checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          title: produto.nome,
-          quantity: quantidade,
-          price: produto.preco
-        }),
-      });
+const iniciarCheckoutMercadoPago = async () => {
+  try {
+    const res = await fetch('/api/checkout', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        title: produto.nome,
+        quantity: quantidade,
+        price: produto.preco,
+      }),
+    });
 
-      const data = await response.json();
+    const data = await res.json();
 
-      if (response.ok) {
-        // Redireciona o usuário para a URL do Mercado Pago
-        window.location.href = data.init_point;
-      } else {
-        alert('Erro ao iniciar pagamento: ' + (data.error || 'Erro desconhecido'));
-      }
-    } catch (error) {
-      console.error('Erro ao chamar API checkout:', error);
-      alert('Erro ao iniciar pagamento');
+    if (data.init_point) {
+      window.location.href = data.init_point; // redireciona para o checkout do Mercado Pago
+    } else {
+      console.error('Resposta inválida da API:', data);
     }
-  };
+  } catch (error) {
+    console.error('Erro ao chamar API checkout:', error);
+  }
+};
+
 
   // Função para buscar cliente por e-mail
   const buscarCliente = async (email) => {
