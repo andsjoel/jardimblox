@@ -9,12 +9,12 @@ const Store = () => {
   const [expandedCard, setExpandedCard] = useState(null);
   const [loading, setLoading] = useState(true); // Estado de carregamento
 
-  const DATABASE_ID = '685ea6600023735f334e';
-  const COLLECTION_ID = '685ea67f002bae8cf723';
+  const DATABASE_ID = process.env.REACT_APP_DATABASE_ID;
+  const PRODUCTS_COLLECTION_ID = process.env.REACT_APP_COLLECTION_PRODUTOS;
 
   const fetchProdutos = async () => {
     try {
-      const res = await databases.listDocuments(DATABASE_ID, COLLECTION_ID);
+      const res = await databases.listDocuments(DATABASE_ID, PRODUCTS_COLLECTION_ID);
       setProdutos(res.documents);
     } catch (error) {
       console.error('Erro ao buscar produtos:', error);

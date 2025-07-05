@@ -4,9 +4,13 @@ import './dados.css';
 
 const Dados = () => {
   const [user, setUser] = useState(null);
+
+  const PROJECT_ID = process.env.REACT_APP_PROJECT_ID;
+  const APPWRITE_ENDPOINT = process.env.REACT_APP_APPWRITE_ENDPOINT;
+
   const [appwriteInfo, setAppwriteInfo] = useState({
-    endpoint: 'https://nyc.cloud.appwrite.io/v1',
-    projectId: '685de4f1000ea5dc2d4d',
+    endpoint: APPWRITE_ENDPOINT,
+    projectId: PROJECT_ID,
   });
   const [serverStatus, setServerStatus] = useState('Carregando...');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -45,8 +49,8 @@ const Dados = () => {
 
     // Atualiza as informações do Appwrite
     setAppwriteInfo({
-      endpoint: 'https://nyc.cloud.appwrite.io/v1',
-      projectId: '685de4f1000ea5dc2d4d',
+      endpoint: APPWRITE_ENDPOINT,
+      projectId: PROJECT_ID,
     });
   }, []);
 
@@ -66,7 +70,7 @@ const Dados = () => {
       {user ? (
         <div className="box-info">
           <p><strong>E-mail:</strong> {user.email}</p>
-          <p><strong>UID:</strong> {user.$id}</p> {/* ID do usuário no Appwrite */}
+          <p><strong>UID:</strong> {user.$id}</p>
         </div>
       ) : (
         <p>Carregando dados do usuário...</p>

@@ -11,10 +11,10 @@ const Pedidos = () => {
   const [produtos, setProdutos] = useState({}); // Para armazenar os produtos com base no ID
   const [clientes, setClients] = useState([]); // Alterado para um array
 
-  const DATABASE_ID = '685ea6600023735f334e';
-  const PEDIDOS_COLLECTION_ID = '68680f080016aa307aaa';
-  const PRODUCTS_COLLECTION_ID = '685ea67f002bae8cf723'; // Coleção de produtos
-  const CLIENTS_COLLECTION_ID = '6865824100358a212ebb'; // Coleção de clientes
+  const DATABASE_ID = process.env.REACT_APP_DATABASE_ID;
+  const PEDIDOS_COLLECTION_ID = process.env.REACT_APP_COLLECTION_PEDIDOS;
+  const PRODUCTS_COLLECTION_ID = process.env.REACT_APP_COLLECTION_PRODUTOS;
+  const CLIENTS_COLLECTION_ID = process.env.REACT_APP_COLLECTION_CLIENTS;
 
   // Função para buscar os pedidos
   const fetchPedidos = async () => {
@@ -187,7 +187,7 @@ const Pedidos = () => {
                   currency: 'BRL',
                 }).format(pedido.total)}
               </td>
-              <td className={getStatusClass(pedido.status)}>{pedido.status}</td> {/* Aplicando a classe dinâmica */}
+              <td className={getStatusClass(pedido.status)}>{pedido.status}</td>
               <td>
                 {pedido.status !== 'Produto Entregue' && (
                   <FaCheck

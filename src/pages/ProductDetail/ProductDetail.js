@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { databases } from '../../service/appwrite'; // Serviço para pegar os dados da API
 import { Query } from 'appwrite'; // Importando Query
 import './productDetail.css';
@@ -8,6 +8,7 @@ import ModalCompra from '../../components/modalCompra/ModalCompra'; // Importand
 
 const ProductDetail = () => {
   const { id } = useParams();  // Obtém o ID do produto da URL
+  const navigate = useNavigate();
   const [produto, setProduto] = useState(null);
   const [quantidade, setQuantidade] = useState(1); // Estado para controlar a quantidade
   const [precoTotal, setPrecoTotal] = useState(0); // Estado para calcular o preço total
@@ -20,16 +21,17 @@ const ProductDetail = () => {
   const [pesquisando, setPesquisando] = useState(false); // Controla a exibição de "Pesquisando..."
   const [isEmailPesquisado, setIsEmailPesquisado] = useState(false); // Controla se o e-mail foi pesquisado
 
-  const DATABASE_ID = '685ea6600023735f334e';
-  const COLLECTION_ID = '685ea67f002bae8cf723';
-  const CLIENTS_COLLECTION_ID = '6865824100358a212ebb'; // ID da coleção de clientes
-  const PEDIDOS_COLLECTION_ID = '68680f080016aa307aaa';
+
+  const DATABASE_ID = process.env.REACT_APP_DATABASE_ID;
+  const PEDIDOS_COLLECTION_ID = process.env.REACT_APP_COLLECTION_PEDIDOS;
+  const PRODUCTS_COLLECTION_ID = process.env.REACT_APP_COLLECTION_PRODUTOS;
+  const CLIENTS_COLLECTION_ID = process.env.REACT_APP_COLLECTION_CLIENTS;
 
   // Função para buscar o produto com base no ID
   useEffect(() => {
     const fetchProduto = async () => {
       try {
-        const res = await databases.getDocument(DATABASE_ID, COLLECTION_ID, id);
+        const res = await databases.getDocument(DATABASE_ID, PRODUCTS_COLLECTION_ID, id);
         setProduto(res);
         setPrecoTotal(res.preco); // Define o preço total inicial com o preço do produto
       } catch (error) {
@@ -39,6 +41,33 @@ const ProductDetail = () => {
 
     fetchProduto();
   }, [id]);
+
+    // Função que chama a API backend para criar preferência Mercado Pago
+  const iniciarCheckoutMercadoPago = async () => {
+    try {
+      const response = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: produto.nome,
+          quantity: quantidade,
+          price: produto.preco
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // Redireciona o usuário para a URL do Mercado Pago
+        window.location.href = data.init_point;
+      } else {
+        alert('Erro ao iniciar pagamento: ' + (data.error || 'Erro desconhecido'));
+      }
+    } catch (error) {
+      console.error('Erro ao chamar API checkout:', error);
+      alert('Erro ao iniciar pagamento');
+    }
+  };
 
   // Função para buscar cliente por e-mail
   const buscarCliente = async (email) => {
@@ -121,10 +150,12 @@ const salvarCliente = async () => {
       // Atualizar o estoque do produto na coleção
       await databases.updateDocument(
         DATABASE_ID,
-        COLLECTION_ID,
+        PRODUCTS_COLLECTION_ID,
         produto.$id, // ID do produto
         { estoque: novoEstoque }
       );
+
+      await iniciarCheckoutMercadoPago();
     } else {
       console.log('Estoque insuficiente para completar o pedido.');
       return;
