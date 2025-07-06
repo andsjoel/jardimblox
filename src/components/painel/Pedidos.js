@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { databases } from '../../service/appwrite'; // Serviço para pegar os dados da API
 import { Query } from 'appwrite'; // Importando Query
-import { FaCheck, FaSearch } from 'react-icons/fa'; // Ícones de "check" e "search"
+import { FaCheck, FaSearch, FaTrash } from 'react-icons/fa'; // Ícones de "check" e "search"
 import './pedidos.css';
 
 const Pedidos = () => {
@@ -73,10 +73,12 @@ const Pedidos = () => {
     }
   };
 
+  
+
   // Função para buscar o e-mail do cliente pelo clienteId
   const buscarEmailCliente = (clienteId) => {
     try {
-      const cliente = clientes.find(cliente => cliente.$id === clienteId); // Encontrando o cliente pelo ID
+      const cliente = clientes.find(cliente => cliente.$id === clienteId);
       
       if (cliente) {
         return cliente.email; // Retorna o e-mail do cliente
@@ -118,7 +120,10 @@ const Pedidos = () => {
   };
 
   // Função para atualizar o status do pedido para "Produto Entregue"
-  const marcarComoEntregue = async (pedidoId) => {
+  const marcarComoEntregue = async (pedidoId, nomeProduto, quantidade) => {
+    const confirmar = window.confirm(`Deseja realmente marcar como entregue o pedido ${nomeProduto} (${quantidade})?`);
+    if (!confirmar) return;
+
     try {
       const pedido = pedidosFiltrados.find(pedido => pedido.$id === pedidoId);
 
@@ -126,10 +131,9 @@ const Pedidos = () => {
         await databases.updateDocument(
           DATABASE_ID,
           PEDIDOS_COLLECTION_ID,
-          pedidoId, // ID do pedido
-          { status: 'Produto Entregue' } // Atualiza o status do pedido
+          pedidoId,
+          { status: 'Produto Entregue' }
         );
-        // Atualiza o estado local para refletir a mudança
         setPedidosFiltrados(prevPedidos =>
           prevPedidos.map(p =>
             p.$id === pedidoId ? { ...p, status: 'Produto Entregue' } : p
@@ -138,6 +142,20 @@ const Pedidos = () => {
       }
     } catch (error) {
       console.error('Erro ao atualizar status do pedido:', error);
+    }
+  };
+
+  const excluirPedido = async (pedidoId, nomeProduto, quantidade) => {
+    const confirmar = window.confirm(`Deseja realmente excluir o pedido ${nomeProduto} (${quantidade})?`);
+    if (!confirmar) return;
+
+    try {
+      await databases.deleteDocument(DATABASE_ID, PEDIDOS_COLLECTION_ID, pedidoId);
+      // Atualiza o estado local para remover o pedido excluído
+      setPedidosFiltrados(prevPedidos => prevPedidos.filter(p => p.$id !== pedidoId));
+      setPedidos(prevPedidos => prevPedidos.filter(p => p.$id !== pedidoId));
+    } catch (error) {
+      console.error('Erro ao excluir pedido:', error);
     }
   };
 
@@ -172,7 +190,7 @@ const Pedidos = () => {
             <th>Quantidade</th>
             <th>Total</th>
             <th>Status</th>
-            <th>Entregue</th>
+            <th>Pedido</th>
           </tr>
         </thead>
         <tbody>
@@ -189,14 +207,24 @@ const Pedidos = () => {
               </td>
               <td className={getStatusClass(pedido.status)}>{pedido.status}</td>
               <td>
-                {pedido.status !== 'Produto Entregue' && (
-                  <FaCheck
-                    onClick={() => marcarComoEntregue(pedido.$id)} 
-                    style={{
-                      cursor: 'pointer',
-                      color: 'green',
-                      fontSize: '20px'
-                    }} 
+                {pedido.status !== 'Produto Entregue' ? (
+                  <>
+                    <FaCheck
+                      onClick={() => marcarComoEntregue(pedido.$id, produtos[pedido.produto], pedido.quantidade)}
+                      style={{ cursor: 'pointer', color: 'green', fontSize: '20px', marginRight: '8px' }}
+                      title="Marcar como entregue"
+                    />
+                    <FaTrash
+                      onClick={() => excluirPedido(pedido.$id, produtos[pedido.produto], pedido.quantidade)}
+                      style={{ cursor: 'pointer', color: 'red', fontSize: '20px' }}
+                      title="Excluir pedido"
+                    />
+                  </>
+                ) : (
+                  <FaTrash
+                    onClick={() => excluirPedido(pedido.$id, produtos[pedido.produto], pedido.quantidade)}
+                    style={{ cursor: 'pointer', color: 'red', fontSize: '20px' }}
+                    title="Excluir pedido"
                   />
                 )}
               </td>

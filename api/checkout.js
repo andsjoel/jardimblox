@@ -9,9 +9,9 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Método não permitido' });
   }
 
-  const { title, quantity, price } = req.body;
+  const { title, quantity, price, pedidoId } = req.body;
 
-  if (!title || !quantity || !price) {
+  if (!title || !quantity || !price || !pedidoId) {
     return res.status(400).json({ error: 'Dados incompletos' });
   }
 
@@ -27,6 +27,7 @@ export default async function handler(req, res) {
           currency_id: 'BRL',
         },
       ],
+      external_reference: pedidoId,
       back_urls: {
         success: `${origin}/sucesso`,
         failure: `${origin}/erro`,

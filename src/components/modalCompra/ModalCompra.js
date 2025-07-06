@@ -16,7 +16,9 @@ const ModalCompra = ({
   produto,
   buscarCliente,
   salvarCliente,
-  cancelar
+  cancelar,
+  loading,
+  setLoading
 }) => {
   // Função para validar se os campos obrigatórios estão preenchidos e com formato correto
   const isFormValid = () => {
@@ -149,7 +151,13 @@ const ModalCompra = ({
 
             <div className="modal-buttons">
               {/* Desabilita o botão de "Confirmar" até que todos os campos estejam preenchidos e válidos */}
-              <button onClick={salvarCliente} disabled={!isFormValid()}>Confirmar</button>
+              <button onClick={salvarCliente} disabled={!isFormValid()}>
+                {loading ? (
+                  <span className='spinner'></span>
+                ) : (
+                  'Confirmar'
+                )}
+              </button>
               <button onClick={cancelar}>Cancelar</button>
             </div>
           </>

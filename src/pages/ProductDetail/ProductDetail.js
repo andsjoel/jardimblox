@@ -10,6 +10,7 @@ const ProductDetail = () => {
   const { id } = useParams();  // Obtém o ID do produto da URL
   const navigate = useNavigate();
   const [produto, setProduto] = useState(null);
+  const [pedido, setPedido] = useState(null)
   const [quantidade, setQuantidade] = useState(1); // Estado para controlar a quantidade
   const [precoTotal, setPrecoTotal] = useState(0); // Estado para calcular o preço total
   const [showModal, setShowModal] = useState(false); // Controla a exibição do modal
@@ -20,6 +21,7 @@ const ProductDetail = () => {
   const [historicoPedidos, setHistoricoPedidos] = useState([]);
   const [pesquisando, setPesquisando] = useState(false); // Controla a exibição de "Pesquisando..."
   const [isEmailPesquisado, setIsEmailPesquisado] = useState(false); // Controla se o e-mail foi pesquisado
+  const [loading, setLoading] = useState(false);
 
 
   const DATABASE_ID = process.env.REACT_APP_DATABASE_ID;
@@ -43,7 +45,8 @@ const ProductDetail = () => {
   }, [id]);
 
     // Função que chama a API backend para criar preferência Mercado Pago
-const iniciarCheckoutMercadoPago = async () => {
+const iniciarCheckoutMercadoPago = async (pedidoId) => {
+  
   try {
     const res = await fetch('/api/checkout', {
       method: 'POST',
@@ -54,6 +57,7 @@ const iniciarCheckoutMercadoPago = async () => {
         title: produto.nome,
         quantity: quantidade,
         price: produto.preco,
+        pedidoId: pedidoId,
       }),
     });
 
@@ -99,6 +103,7 @@ const iniciarCheckoutMercadoPago = async () => {
 const salvarCliente = async () => {
   try {
     // 1. Verificar se o cliente já existe
+    setLoading(true);
     let clienteId;
 
     if (!isClienteExistente) {
@@ -124,6 +129,7 @@ const salvarCliente = async () => {
       } else {
         // Se o histórico de pedidos não tiver dados ou o cliente não for encontrado, falha a criação do pedido
         console.log('Cliente não encontrado no histórico.');
+        setLoading(false);
         return;
       }
     }
@@ -156,7 +162,7 @@ const salvarCliente = async () => {
         { estoque: novoEstoque }
       );
 
-      await iniciarCheckoutMercadoPago();
+      await iniciarCheckoutMercadoPago(resPedido.$id);
     } else {
       console.log('Estoque insuficiente para completar o pedido.');
       return;
@@ -167,6 +173,7 @@ const salvarCliente = async () => {
     // Aqui, você pode também adicionar alguma lógica para fechar o modal ou mostrar um aviso ao usuário.
 
   } catch (error) {
+    setLoading(false);
     console.error('Erro ao salvar cliente ou criar pedido:', error);
   }
 };
@@ -251,6 +258,8 @@ const salvarCliente = async () => {
           buscarCliente={buscarCliente}
           salvarCliente={salvarCliente}
           cancelar={cancelar}
+          loading={loading}
+          setLoading={setLoading}
         />
       )}
     </div>
