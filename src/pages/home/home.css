@@ -2,6 +2,7 @@
   text-align: center;
   /* margin-top: 60px; */
   font-family: Arial, sans-serif;
+  width: 100%;
 }
 
 .home-hero {
@@ -76,11 +77,9 @@
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
 }
 
-
-
 @media (max-width: 600px) {
   .home-banner {
-    margin-top: 60px;
+    margin-top: 40px;
   }
 
   .btn-loja {

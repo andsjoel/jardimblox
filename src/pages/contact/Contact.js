@@ -5,9 +5,10 @@ import Header from '../../components/header/Header';
 
 const Contact = () => {
     return (
+        <>
+        <Header />
         <div className="contact-container">
-          <Header />
-          
+ 
             <h1>Entre em Contato</h1>
             <p>
                 Se você tiver alguma dúvida ou precisar de ajuda, não hesite em entrar em contato conosco! 
@@ -25,6 +26,7 @@ const Contact = () => {
                 </a>
             </div>
         </div>
+        </>
     );
 }
 

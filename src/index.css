@@ -1,3 +1,37 @@
+:root {
+  /* Backgrounds */
+  --color-bg-primary: #110514;
+  --color-bg-secondary: #f5f5f5;
+  --color-bg-tertiary: #e0e0e0;
+
+  /* Cores primárias */
+  --color-primary: #007bff;
+  --color-primary-light: #339cff;
+  --color-primary-dark: #0056b3;
+
+  /* Cores secundárias */
+  --color-secondary: #6c757d;
+  --color-secondary-light: #a1a6ab;
+  --color-secondary-dark: #494f54;
+
+  /* Botões */
+  --color-button-primary-bg: var(--color-primary);
+  --color-button-primary-text: #ffffff;
+  --color-button-primary-hover-bg: var(--color-primary-dark);
+
+  --color-button-secondary-bg: var(--color-secondary);
+  --color-button-secondary-text: #ffffff;
+  --color-button-secondary-hover-bg: var(--color-secondary-dark);
+
+  /* Texto */
+  --color-text-primary: #212529;
+  --color-text-secondary: #6c757d;
+  --color-text-inverse: #ffffff;
+
+  /* Bordas */
+  --color-border: #dee2e6;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -5,6 +39,6 @@
 }
 
 body {
-  background-color: black;
+  background-color: var(--color-bg-primary);
   /* height: 400vh; */
 }

@@ -20,39 +20,39 @@ const Header = () => {
       <header className={`header ${scrolled ? 'scrolled' : ''}`}>
         <h1 className="logo">Jardim Blox</h1>
 
-<nav className="nav">
-  <NavLink to="/" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
-    <FaHome className="nav-icon" />
-    <span>Início</span>
-  </NavLink>
+      <nav className="nav">
+        <NavLink to="/" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
+          <FaHome className="nav-icon" />
+          <span>Início</span>
+        </NavLink>
 
-  <NavLink to="/loja" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
-    <FaStore className="nav-icon" />
-    <span>Loja</span>
-  </NavLink>
+        <NavLink to="/loja" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
+          <FaStore className="nav-icon" />
+          <span>Loja</span>
+        </NavLink>
 
-  <NavLink to="/contato" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
-    <FaComments className="nav-icon" />
-    <span>Contato</span>
-  </NavLink>
+        <NavLink to="/contato" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
+          <FaComments className="nav-icon" />
+          <span>Contato</span>
+        </NavLink>
 
-  <NavLink to="/client" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
-    <FaShoppingCart className="nav-icon" />
-    <span>Minhas Compras</span>
-  </NavLink>
-</nav>
-
+        <NavLink to="/client" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
+          <FaShoppingCart className="nav-icon" />
+          <span>Minhas Compras</span>
+        </NavLink>
+      </nav>
 
         <a
           href="https://discord.com"
           target="_blank"
           rel="noopener noreferrer"
-          className="discord-button"
+          className="discord-button b"
         >
           <FaDiscord className="icon" />
           <span>Entrar no Discord</span>
         </a>
       </header>
+      
     </>
   )
 }

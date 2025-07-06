@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { databases } from '../../service/appwrite';
 import ProdutoCard from '../../components/productCard/productCard';
 import './store.css';
+import bgStore from '../../assets/images/background/background_store.png'
 import Header from '../../components/header/Header';
 
 const Store = () => {
@@ -36,15 +37,16 @@ const Store = () => {
   }, []);
 
   return (
+    <>
+    <Header />
     <div className="catalogo-container">
-      <Header />
-      
-      <h1>Catálogo</h1>
+    <div className="store-banner-container">
+      <img src={bgStore} alt="Banner da loja" className="store-banner" />
+    </div>      
 
       {loading ? (
         <div className="loading-container">
-          <div className="loading-spinner"></div> {/* Coloque aqui um spinner ou animação de carregamento */}
-          <p>Carregando produtos...</p>
+          <div className="loading-spinner"></div>
         </div>
       ) : (
         <div className="lista-produtos">
@@ -61,6 +63,7 @@ const Store = () => {
         </div>
       )}
     </div>
+    </>
   );
 };
 

@@ -1,21 +1,58 @@
 .card-produto {
-  background-color: #fff;
+  position: relative; /* necessário para posicionar o ::before */
+  overflow: hidden;   /* impede o brilho de sair dos limites */
+  background-color: #00000080;
+  border: .5px solid rgba(255, 255, 255, 0.541);
   padding: 1rem;
   border-radius: 8px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  box-shadow: 0px 0px 15px rgba(153, 245, 4, 0.5);
   overflow: hidden;
-  max-height: 240px;
+  height: 230px;
   width: 100%;
-  min-height: 300px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: transform 0.3s ease, max-height 0.3s ease;
+  transition: transform 0.3s ease, height 0.5s ease;
   cursor: pointer;
+  z-index: 0;
+  color: white;
 }
 
-.card-produto.expandido {
-  max-height: 600px;
+.card-produto.usuario::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-20deg);
+  animation: shine 6s infinite;
+  pointer-events: none; /* permite clicar nos elementos abaixo normalmente */
+  z-index: 0;
+  opacity: .5;
+}
+
+@keyframes shine {
+  0% {
+    left: -75%;
+  }
+  100% {
+    left: 125%;
+  }
+}
+
+.card-produto.expandido.admin {
+  height: 480px;
+}
+
+.card-produto.expandido.usuario {
+  height: 300px;
   transform: scale(1.02);
 }
 
@@ -27,27 +64,47 @@
   margin-bottom: 0.5rem;
 }
 
+.name-price {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .card-produto h3 {
-  margin: 0.5rem 0;
+  /* margin: 0.5rem 0; */
   font-size: 1.1rem;
+  text-transform: uppercase;
+}
+
+.card-produto details summary {
+  cursor: pointer;
+  /* margin-top: 0.5rem; */
+  color: #2980b9;
 }
 
 .card-produto .preco {
   font-weight: bold;
-  color: #27ae60;
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
+  background-color: rgb(136, 60, 9);
+  color: #eeff00;
+  font-size: 1.8rem;
+  margin-right: -1rem;
+  width: 60%;
+  border-radius: 20px 0 0 20px;
+  padding: 0 10px;
+  text-align: end;
+  /* margin-bottom: 0.5rem; */
 }
 
 .card-produto .descricao-completa {
-  margin-top: 1rem;
+  width: 100%;
+  margin-top: 0;
+  display: none;
 }
 
-.estoque {
-  font-size: 0.9rem;
-  color: #666;
-  /* margin-top: -0.5rem; */
-  margin-bottom: 0.5rem;
+.card-produto.expandido .descricao-completa {
+  display: block;
+  animation: expandir 0.3s ease-out forwards;
 }
 
 .card-produto .actions {
@@ -57,7 +114,9 @@
 .card-produto .comprar-agora,
 .card-produto .editar,
 .card-produto .excluir {
-  padding: 0.8rem;
+  margin-top: 1rem;
+  width: 100%;
+  padding: 8px;
   background-color: #27ae60;
   color: white;
   font-weight: bold;
@@ -82,17 +141,22 @@
   background-color: #c0392b;
 }
 
-/* Quando o card está colapsado, não exibe os detalhes */
-.card-produto .descricao-completa {
-  display: none;
+.card-produto.expandido .comprar-agora {
+  animation: aparecer 0.3s ease-out forwards;
 }
 
-/* Animando a abertura e fechamento */
-.card-produto.expandido .descricao-completa {
-  display: block;
-  animation: expandir 0.3s ease-out forwards;
+.estoque {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 0.5rem;
 }
 
+.nenhum {
+  font-style: italic;
+  color: #888;
+}
+
+/* Animações */
 @keyframes expandir {
   from {
     opacity: 0;
@@ -102,10 +166,6 @@
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-.card-produto.expandido .comprar-agora {
-  animation: aparecer 0.3s ease-out forwards;
 }
 
 @keyframes aparecer {

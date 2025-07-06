@@ -13,7 +13,7 @@ const ProdutoCard = ({ produto, isAdmin, onClickOutside, isExpanded, onClick, on
 
   return (
     <div
-      className={`card-produto ${isVisible ? 'expandido' : ''}`}
+      className={`card-produto ${isExpanded ? 'expandido' : ''} ${isAdmin ? 'admin' : 'usuario'}`}
       onClick={onClick}
       onAnimationEnd={() => {
         if (!isVisible) {
@@ -22,16 +22,16 @@ const ProdutoCard = ({ produto, isAdmin, onClickOutside, isExpanded, onClick, on
       }}
     >
       <img src={produto.imagem} alt={produto.nome} />
-      <h3>{produto.nome}</h3>
-      <p>
-        <strong>Preço:</strong>{' '}
-        {new Intl.NumberFormat('pt-BR', {
-          style: 'currency',
-          currency: 'BRL'
-        }).format(produto.preco)}
-      </p>
+      <div className='name-price'>
+        <h3>{produto.nome}</h3>
+        <p className='preco'>
+          {new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+          }).format(produto.preco)}
+        </p>
+      </div>
       {isAdmin && <p className="estoque">Estoque: {produto.estoque}</p>}
-      {!isAdmin && <p><strong>Curta:</strong> {produto.descricao}</p>}
 
       {isVisible && (
         <div className="descricao-completa">

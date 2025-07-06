@@ -7,19 +7,22 @@ import './home.css';
 
 const Home = () => {
   return (
-    <div className='home-container'>
+    <>
       <Header />
+      <div className='home-container'>
+        
 
-      <div className='home-hero'>
-        <img src={bgHome} alt="Banner da loja" className="home-banner" />
+        <div className='home-hero'>
+          <img src={bgHome} alt="Banner da loja" className="home-banner" />
 
-        <Link to="/loja" className='btn-loja'>
-          Veja nossos produtos!
-        </Link>
+          <Link to="/loja" className='btn-loja'>
+            Veja nossos produtos!
+          </Link>
+        </div>
+
+        <FAQ />
       </div>
-
-      <FAQ />
-    </div>
+    </>
   )
 }
 
