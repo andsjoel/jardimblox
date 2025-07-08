@@ -1,34 +1,35 @@
+@font-face {
+  font-family: Albert;
+  src: url(./assets/fonts/Albert_Sans/AlbertSans-VariableFont_wght.ttf)
+}
+
 :root {
-  /* Backgrounds */
-  --color-bg-primary: #110514;
-  --color-bg-secondary: #f5f5f5;
-  --color-bg-tertiary: #e0e0e0;
+  --color-bg-primary: #2e1c33;
+  --color-bg-secondary: #15061a;
+  --color-bg-tertiary: #65496d;
 
-  /* Cores primárias */
-  --color-primary: #007bff;
-  --color-primary-light: #339cff;
-  --color-primary-dark: #0056b3;
+  --color-primary: #1f382d;
+  --color-primary-light: #3e5e50;
+  --color-primary-dark: #0d2219;
 
-  /* Cores secundárias */
   --color-secondary: #6c757d;
   --color-secondary-light: #a1a6ab;
   --color-secondary-dark: #494f54;
 
-  /* Botões */
-  --color-button-primary-bg: var(--color-primary);
-  --color-button-primary-text: #ffffff;
+  --color-button-primary-bg: #1c7c44cb;
+  --color-button-primary-text: #e9e9e9;
   --color-button-primary-hover-bg: var(--color-primary-dark);
 
   --color-button-secondary-bg: var(--color-secondary);
   --color-button-secondary-text: #ffffff;
   --color-button-secondary-hover-bg: var(--color-secondary-dark);
 
-  /* Texto */
-  --color-text-primary: #212529;
-  --color-text-secondary: #6c757d;
-  --color-text-inverse: #ffffff;
+  --color-text-primary: #e9e9e9;
+  --color-text-secondary: #b7d319;
+  --color-text-inverse: var(--color-bg-secondary);
 
-  /* Bordas */
+  --color-discord: #5865f2;
+
   --color-border: #dee2e6;
 }
 
@@ -41,4 +42,5 @@
 body {
   background-color: var(--color-bg-primary);
   /* height: 400vh; */
+  font-family: 'Albert';
 }

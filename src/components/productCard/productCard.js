@@ -32,11 +32,7 @@ const ProdutoCard = ({ produto, isAdmin, onClickOutside, isExpanded, onClick, on
         </p>
       </div>
       {isAdmin && <p className="estoque">Estoque: {produto.estoque}</p>}
-
-      {isVisible && (
-        <div className="descricao-completa">
-          {isAdmin && <p><strong>Descrição:</strong> {produto.descricao}</p>}
-          {!isAdmin && (
+                {!isAdmin && (
             <button
               className="comprar-agora"
               onClick={(e) => {
@@ -47,6 +43,10 @@ const ProdutoCard = ({ produto, isAdmin, onClickOutside, isExpanded, onClick, on
               Comprar Agora
             </button>
           )}
+
+      {isVisible && (
+        <div className="descricao">
+          {isAdmin && <p><strong>Descrição:</strong> {produto.descricao}</p>}
           {isAdmin && (
             <div className="actions">
               <button className="editar" onClick={(e) => {

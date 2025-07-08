@@ -40,28 +40,29 @@ const Store = () => {
     <>
     <Header />
     <div className="catalogo-container">
-    <div className="store-banner-container">
-      <img src={bgStore} alt="Banner da loja" className="store-banner" />
-    </div>      
+      <div className="store-banner-container">
+        <img src={bgStore} alt="Banner da loja" className="store-banner" />
+        {/* <h2 className='catalogo-title'>LOJA</h2> */}
+      </div>      
 
-      {loading ? (
-        <div className="loading-container">
-          <div className="loading-spinner"></div>
-        </div>
-      ) : (
-        <div className="lista-produtos">
-          {produtos.map(prod => (
-            <ProdutoCard
-              key={prod.$id}
-              produto={prod}
-              isAdmin={false}
-              isExpanded={expandedCard === prod.$id}
-              onClick={() => handleCardClick(prod.$id)}
-              onClickOutside={handleCardClickOutside}
-            />
-          ))}
-        </div>
-      )}
+        {loading ? (
+          <div className="loading-container">
+            <div className="loading-spinner"></div>
+          </div>
+        ) : (
+          <div className="lista-produtos">
+            {produtos.map(prod => (
+              <ProdutoCard
+                key={prod.$id}
+                produto={prod}
+                isAdmin={false}
+                isExpanded={expandedCard === prod.$id}
+                onClick={() => handleCardClick(prod.$id)}
+                onClickOutside={handleCardClickOutside}
+              />
+            ))}
+          </div>
+        )}
     </div>
     </>
   );

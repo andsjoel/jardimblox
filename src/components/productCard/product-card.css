@@ -1,11 +1,12 @@
-.card-produto {
-  position: relative; /* necessário para posicionar o ::before */
-  overflow: hidden;   /* impede o brilho de sair dos limites */
+.card-produto.usuario {
+  position: relative;
+  overflow: hidden;
   background-color: #00000080;
-  border: .5px solid rgba(255, 255, 255, 0.541);
-  padding: 1rem;
+  border: 2px solid rgb(0, 0, 0);
+  /* padding: 1rem; */
+  box-shadow: 0 0 8px 6px rgba(0, 0, 0, 0.582);
   border-radius: 8px;
-  box-shadow: 0px 0px 15px rgba(153, 245, 4, 0.5);
+  /* box-shadow: 0px 0px 15px rgb(0, 0, 0); */
   overflow: hidden;
   height: 230px;
   width: 100%;
@@ -16,6 +17,64 @@
   cursor: pointer;
   z-index: 0;
   color: white;
+  font-family: 'Albert';
+}
+
+.card-produto.expandido.usuario {
+  height: 265px;
+  transform: scale(1.02);
+}
+
+.card-produto.usuario img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  /* border-radius: 6px; */
+  /* margin-bottom: 0.5rem; */
+}
+
+.card-produto.usuario .name-price {
+  margin-top: 1rem;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.card-produto.usuario h3 {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  text-align: center;
+  width: 100%;
+}
+
+.card-produto.usuario .preco {
+  font-weight: bold;
+  /* background-color: rgb(136, 60, 9); */
+  color: #73abec;
+  font-size: 1.8rem;
+  /* margin-right: -1rem; */
+  /* width: 60%; */
+  /* border-radius: 20px 0 0 20px; */
+  /* padding: 0 10px; */
+  text-align: end;
+  /* margin-bottom: 0.5rem; */
+}
+
+.card-produto.usuario .comprar-agora {
+  width: 100%;
+  height: 60px;
+  animation: aparecer 0.3s ease-out forwards;
+  margin-top: 2.5rem;
+  padding: 8px;
+  background-color: #27ae60;
+  color: white;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .card-produto.usuario::before {
@@ -33,7 +92,7 @@
   );
   transform: skewX(-20deg);
   animation: shine 6s infinite;
-  pointer-events: none; /* permite clicar nos elementos abaixo normalmente */
+  pointer-events: none;
   z-index: 0;
   opacity: .5;
 }
@@ -45,73 +104,36 @@
   100% {
     left: 125%;
   }
-}
+} */
 
-.card-produto.expandido.admin {
+/* .card-produto.expandido.admin {
   height: 480px;
 }
 
-.card-produto.expandido.usuario {
-  height: 300px;
-  transform: scale(1.02);
-}
 
-.card-produto img {
-  width: 100%;
-  height: 160px;
-  object-fit: cover;
-  border-radius: 6px;
-  margin-bottom: 0.5rem;
-}
 
-.name-price {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
 
-.card-produto h3 {
-  /* margin: 0.5rem 0; */
-  font-size: 1.1rem;
-  text-transform: uppercase;
-}
 
-.card-produto details summary {
-  cursor: pointer;
-  /* margin-top: 0.5rem; */
-  color: #2980b9;
-}
 
-.card-produto .preco {
-  font-weight: bold;
-  background-color: rgb(136, 60, 9);
-  color: #eeff00;
-  font-size: 1.8rem;
-  margin-right: -1rem;
-  width: 60%;
-  border-radius: 20px 0 0 20px;
-  padding: 0 10px;
-  text-align: end;
-  /* margin-bottom: 0.5rem; */
-}
 
-.card-produto .descricao-completa {
+
+
+/* .card-produto .descricao-completa {
   width: 100%;
   margin-top: 0;
   display: none;
-}
+} */
 
-.card-produto.expandido .descricao-completa {
+/* .card-produto.expandido .descricao-completa {
   display: block;
   animation: expandir 0.3s ease-out forwards;
-}
+} */
 
-.card-produto .actions {
+/* .card-produto .actions {
   margin-top: 1rem;
-}
+} */
 
-.card-produto .comprar-agora,
+/* .card-produto .comprar-agora,
 .card-produto .editar,
 .card-produto .excluir {
   margin-top: 1rem;
@@ -125,36 +147,36 @@
   cursor: pointer;
   transition: background-color 0.3s ease;
   margin-right: 10px;
-}
+} */
 
-.card-produto .comprar-agora:hover,
+/* .card-produto .comprar-agora:hover,
 .card-produto .editar:hover,
 .card-produto .excluir:hover {
   background-color: #219150;
-}
+} */
 
-.card-produto .excluir {
+/* .card-produto .excluir {
   background-color: #e74c3c;
-}
+} */
 
 .card-produto .excluir:hover {
   background-color: #c0392b;
 }
 
-.card-produto.expandido .comprar-agora {
+/* .card-produto.expandido .comprar-agora {
   animation: aparecer 0.3s ease-out forwards;
-}
+} */
 
-.estoque {
+/* .estoque {
   font-size: 0.9rem;
   color: #666;
   margin-bottom: 0.5rem;
-}
+} */
 
-.nenhum {
+/* .nenhum {
   font-style: italic;
   color: #888;
-}
+} */
 
 /* Animações */
 @keyframes expandir {
@@ -171,10 +193,10 @@
 @keyframes aparecer {
   from {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(0);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(-20px);
   }
 }

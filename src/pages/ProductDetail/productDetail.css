@@ -54,7 +54,7 @@
   font-weight: bold;
 }
 
-.comprar-agora {
+.product-detail-container .comprar-agora {
   margin-top: 2rem;
   background-color: #27ae60;
   color: white;
@@ -102,7 +102,7 @@
   margin-top: 1rem;
 }
 
-button {
+.product-detail-container button {
   margin-top: 1rem;
   padding: 0.7rem 1.5rem;
   background-color: #27ae60;
