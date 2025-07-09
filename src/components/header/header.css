@@ -24,8 +24,7 @@
 }
 
 .logo {
-  font-size: 1.8rem;
-  font-weight: bold;
+  width: 180px;
 }
 
 .discord-button {
@@ -37,7 +36,7 @@
   border-radius: 6px;
   text-decoration: none;
   font-weight: 500;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.5s ease;
   white-space: nowrap;
   position: relative;
   overflow: hidden;
@@ -80,7 +79,15 @@
   font-size: 1.2rem;
 }
 
+.discord-button:hover {
+  transform: scale(1.05);
+}
+
 /* NAV - DESKTOP */
+
+.header.scrolled {
+  border-bottom: 1px solid white;
+}
 .nav {
   display: flex;
   justify-content: center;

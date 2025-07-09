@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { databases } from '../../service/appwrite'; // Serviço para pegar os dados da API
 import { Query } from 'appwrite'; // Importando Query
+import { FaPlus, FaMinus, FaTruck, FaShieldAlt, FaUndo, FaHeadset, FaCheckCircle } from 'react-icons/fa'
 import './productDetail.css';
 import Header from '../../components/header/Header';
 import ModalCompra from '../../components/modalCompra/ModalCompra'; // Importando o ModalCompra
@@ -216,30 +217,31 @@ const salvarCliente = async () => {
   }
 
   return (
+    <section className='product-container'>
+    <Header />
     <div className="product-detail-container">
-      <Header />
 
       <div className="product-image">
         <img src={produto.imagem} alt={produto.nome} />
       </div>
       <div className="product-info">
-        <h1>{produto.nome}</h1>
+        <h2>{produto.nome}</h2>
         <p className="price">
           {new Intl.NumberFormat('pt-BR', {
             style: 'currency',
             currency: 'BRL',
-          }).format(produto.preco)}
+          }).format(produto.preco*quantidade)}
         </p>
 
         {/* Botões de aumentar/diminuir a quantidade */}
         <div className="quantidade-controls">
-          <button onClick={diminuirQuantidade}>-</button>
+          <button onClick={diminuirQuantidade}><FaMinus /></button>
           <span>{quantidade}</span>
-          <button onClick={aumentarQuantidade}>+</button>
+          <button onClick={aumentarQuantidade}><FaPlus /></button>
         </div>
 
         <button onClick={() => setShowModal(true)} className="comprar-agora">Comprar Agora</button>
-      </div>
+    </div>
 
       {showModal && (
         <ModalCompra
@@ -263,6 +265,51 @@ const salvarCliente = async () => {
         />
       )}
     </div>
+
+      <div className="product-desc">
+        <div className="info-item">
+          <FaCheckCircle className="icon" />
+          <div>
+            <h4>Entrega Imediata</h4>
+            <p>Após a confirmação do pagamento, o pet será entregue diretamente no jogo via troca (trade) no Roblox.</p>
+          </div>
+        </div>
+
+        <div className="info-item">
+          <FaShieldAlt className="icon" />
+          <div>
+            <h4>Compra Segura</h4>
+            <p>Todo o processo é feito de forma segura, com proteção de dados e pagamento via Mercado Pago.</p>
+          </div>
+        </div>
+
+        <div className="info-item">
+          <FaUndo className="icon" />
+          <div>
+            <h4>Garantia de Troca</h4>
+            <p>Se o pet entregue estiver diferente do anunciado, você pode solicitar a troca em até 7 dias.</p>
+          </div>
+        </div>
+
+        <div className="info-item">
+          <FaHeadset className="icon" />
+          <div>
+            <h4>Suporte Rápido</h4>
+            <p>Nossa equipe está disponível para ajudar com dúvidas e agendar a entrega do seu pet no Roblox.</p>
+          </div>
+        </div>
+
+        <div className="info-item">
+          <FaTruck className="icon" />
+          <div>
+            <h4>100% Virtual</h4>
+            <p>Este é um item virtual para o jogo Roblox – não há envio físico. Basta ter uma conta no jogo para receber.</p>
+          </div>
+        </div>
+      </div>
+
+
+    </section>
   );
 };
 

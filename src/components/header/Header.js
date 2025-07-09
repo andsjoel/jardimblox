@@ -3,6 +3,9 @@ import { NavLink } from 'react-router-dom';
 import { FaDiscord, FaStore, FaUserFriends  } from 'react-icons/fa';
 import { AiFillHome } from 'react-icons/ai';
 
+import LogoPrincipal from '../../assets/logos/logo_principal.svg';
+import LogoReduzida from '../../assets/logos/logo_reduzida.svg';
+
 import './header.css';
 
 const Header = () => {
@@ -20,7 +23,7 @@ const Header = () => {
   return (
     <>
       <header className={`header ${scrolled ? 'scrolled' : ''}`}>
-        <h1 className="logo">Jardim Blox</h1>
+        <img src={LogoPrincipal} alt="Jardim Blox logo" className="logo" />
 
       <nav className="nav">
         <NavLink to="/" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
