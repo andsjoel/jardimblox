@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { FaDiscord, FaHome, FaStore, FaComments, FaUserAlt  } from 'react-icons/fa';
-import { AiFillHome, AiFillMessage } from 'react-icons/ai';
+import { FaDiscord, FaStore, FaUserFriends  } from 'react-icons/fa';
+import { AiFillHome } from 'react-icons/ai';
 
 import './header.css';
 
@@ -33,15 +33,15 @@ const Header = () => {
           <span>Loja</span>
         </NavLink>
 
-        <NavLink to="/contato" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
-          <AiFillMessage className="nav-icon" />
-          <span>Contato</span>
+        <NavLink to="/comunidade" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
+          <FaUserFriends className="nav-icon" />
+          <span>Comunidade</span>
         </NavLink>
 
-        <NavLink to="/client" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
+        {/* <NavLink to="/client" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
           <FaUserAlt  className="nav-icon" />
           <span>Minhas Compras</span>
-        </NavLink>
+        </NavLink> */}
       </nav>
 
         <a

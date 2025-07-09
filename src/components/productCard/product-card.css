@@ -87,14 +87,15 @@
   background: linear-gradient(
     120deg,
     rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0.4) 0%,
     rgba(255, 255, 255, 0) 100%
   );
   transform: skewX(-20deg);
   animation: shine 6s infinite;
   pointer-events: none;
   z-index: 0;
-  opacity: .5;
+  opacity: .3;
+  filter: blur(4px);
 }
 
 @keyframes shine {

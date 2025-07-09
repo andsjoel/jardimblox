@@ -7,6 +7,7 @@ import PrivateRoute from './components/privateRoute/PrivateRoute';
 import Painel from './pages/painel/Painel';
 import Contact from './pages/contact/Contact';
 import ProductDetail from './pages/ProductDetail/ProductDetail';
+import Community from './pages/Community/Community';
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
       <Routes>
         <Route path='/' element={ <Home /> } />
         <Route path='/loja' element={ <Store /> } />
-        <Route path='/contato' element={ <Contact /> } />
+        <Route path='/comunidade' element={ <Community /> } />
         <Route path='/produto/:id' element={ <ProductDetail /> } />
 
         <Route path='/admin' element={ <Admin /> } />

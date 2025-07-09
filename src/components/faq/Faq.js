@@ -5,7 +5,7 @@ import './faq.css'
 const faqData = [
   {
     question: 'É seguro comprar na Jardim Blox?',
-    answer: 'Sim! Trabalhamos com segurança total durante todo o processo de compra. Sua experiência é nossa prioridade.'
+    answer: 'Sim! Trabalhamos com segurança total durante todo o processo. Ao comprar nossos produtos, você deve concluir o pagamento diretamente pelo Mercado Pago, assegurando a privacidade dos seus dados. Sua experiência é nossa prioridade.'
   },
   {
     question: 'Como comprar?',
