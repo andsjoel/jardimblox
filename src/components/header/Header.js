@@ -3,8 +3,8 @@ import { NavLink } from 'react-router-dom';
 import { FaDiscord, FaStore, FaUserFriends  } from 'react-icons/fa';
 import { AiFillHome } from 'react-icons/ai';
 
-import LogoPrincipal from '../../assets/logos/logo_principal.svg';
-import LogoReduzida from '../../assets/logos/logo_reduzida.svg';
+import LogoPrincipal from '../../assets/logos/logo_sticker.svg';
+// import LogoReduzida from '../../assets/logos/logo_reduzida.svg';
 
 import './header.css';
 

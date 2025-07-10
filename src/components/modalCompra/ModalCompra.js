@@ -1,5 +1,10 @@
-import React, { useState, useEffect } from 'react';
+// import React, { useState, useEffect } from 'react';
+import LogoReduzida from '../../assets/logos/logo_reduzida.svg';
+import { AiFillCloseCircle } from "react-icons/ai";
+
+
 import './modalcompra.css';  // Importe o CSS se necessário
+import { useEffect, useState } from 'react';
 
 const ModalCompra = ({
   email,
@@ -20,14 +25,22 @@ const ModalCompra = ({
   loading,
   setLoading
 }) => {
+    const [isValid, setIsValid] = useState(false)
+  
   // Função para validar se os campos obrigatórios estão preenchidos e com formato correto
-  const isFormValid = () => {
-    const isNomeValid = nome.length >= 3;  // Nome deve ter pelo menos 3 letras
-    const isEmailValid = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(email);  // Verifica formato do e-mail
-    const isCelularValid = celular.replace(/\D/g, '').length === 11;  // Celular deve ter 11 dígitos sem formatação
+    useEffect(() => {
+      const isNomeValid = nome.length >= 3;
+      const isEmailValid = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(email);
+      const isCelularValid = celular.replace(/\D/g, '').length === 11;
 
-    return isNomeValid && isEmailValid && isCelularValid;
-  };
+      if (isClienteExistente && isEmailPesquisado) {
+        setIsValid(true);
+      } else if (isNomeValid && isEmailValid && isCelularValid) {
+        setIsValid(true);
+      } else {
+        setIsValid(false);
+      }
+    }, [nome, email, celular, isClienteExistente, isEmailPesquisado]);
 
   // Função para validar e aceitar apenas letras no nome
   const handleNomeChange = (e) => {
@@ -73,6 +86,9 @@ const ModalCompra = ({
   return (
     <div className="modal">
       <div className="modal-content">
+        <div className='modal-header'>
+          <button onClick={cancelar}><AiFillCloseCircle /></button>
+        </div>
         <h3>Confirmação do Pedido</h3>
 
         {/* Campo de E-mail */}
@@ -85,12 +101,12 @@ const ModalCompra = ({
               onChange={e => setEmail(e.target.value)}
               required
             />
-            <button onClick={handleBuscarCliente}>Continuar</button>
+            <button className='modal-confirm' onClick={handleBuscarCliente}>Continuar</button>
           </>
         )}
 
         {/* Mensagem "Pesquisando..." enquanto busca os dados */}
-        {pesquisando && <p>Pesquisando...</p>}
+        {pesquisando && <h3>Pesquisando...</h3>}
 
         {/* Mostrar o e-mail digitado após a pesquisa */}
         {isEmailPesquisado && !pesquisando && (
@@ -101,7 +117,7 @@ const ModalCompra = ({
               readOnly
               disabled
             />
-            <p><strong>E-mail confirmado!</strong></p>
+            <h3>E-mail confirmado!</h3>
           </>
         )}
 
@@ -151,14 +167,13 @@ const ModalCompra = ({
 
             <div className="modal-buttons">
               {/* Desabilita o botão de "Confirmar" até que todos os campos estejam preenchidos e válidos */}
-              <button onClick={salvarCliente} disabled={!isFormValid()}>
+              <button className='modal-confirm' onClick={salvarCliente} disabled={!isValid}>
                 {loading ? (
                   <span className='spinner'></span>
                 ) : (
                   'Confirmar'
                 )}
               </button>
-              <button onClick={cancelar}>Cancelar</button>
             </div>
           </>
         )}
