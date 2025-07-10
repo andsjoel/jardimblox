@@ -98,34 +98,7 @@
   justify-content: center;
   height: 40vh;
   gap: 1rem;
+  margin-top: 100px;
 }
 
-.loading-spinner {
-  position: relative;
-}
-
-.loading-spinner::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 40px;
-  height: 40px;
-  border: 55px solid #e0e0e0;
-  border-radius: 4px;
-  transform: translate(-50%, -50%) rotate(0deg);
-  animation: rotate-square 1.5s ease-in-out infinite;
-}
-
-@keyframes rotate-square {
-  0% {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-  50% {
-    transform: translate(-50%, -50%) rotate(180deg);
-  }
-  100% {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
-}
 

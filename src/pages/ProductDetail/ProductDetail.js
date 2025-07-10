@@ -23,6 +23,7 @@ const ProductDetail = () => {
   const [pesquisando, setPesquisando] = useState(false); // Controla a exibição de "Pesquisando..."
   const [isEmailPesquisado, setIsEmailPesquisado] = useState(false); // Controla se o e-mail foi pesquisado
   const [loading, setLoading] = useState(false);
+  const [clienteId, setClienteId] = useState(null);
 
 
   const DATABASE_ID = process.env.REACT_APP_DATABASE_ID;
@@ -89,6 +90,7 @@ const iniciarCheckoutMercadoPago = async (pedidoId) => {
         setNome(cliente.nome);
         setCelular(cliente.celular);
         setHistoricoPedidos(cliente.pedidos || []);
+        setClienteId(cliente.$id)
       } else {
         setIsClienteExistente(false);
       }
@@ -105,10 +107,11 @@ const salvarCliente = async () => {
   try {
     // 1. Verificar se o cliente já existe
     setLoading(true);
-    let clienteId;
+
+    let clienteIdLocal;
 
     if (!isClienteExistente) {
-      // 2. Se o cliente não existir, cria um novo cliente
+      // cria novo cliente
       const novoCliente = {
         email: email,
         nome: nome,
@@ -118,18 +121,15 @@ const salvarCliente = async () => {
       const resCliente = await databases.createDocument(
         DATABASE_ID,
         CLIENTS_COLLECTION_ID,
-        'unique()', // ID único gerado automaticamente
+        'unique()',
         novoCliente
       );
 
-      clienteId = resCliente.$id; // Pega o ID do novo cliente
+      clienteIdLocal = resCliente.$id;
     } else {
-      // 3. Se o cliente já existir, usamos o ID do cliente encontrado
-      if (historicoPedidos.length > 0 && historicoPedidos[0].cliente) {
-        clienteId = historicoPedidos[0].cliente.$id; // Acessa o ID do cliente
-      } else {
-        // Se o histórico de pedidos não tiver dados ou o cliente não for encontrado, falha a criação do pedido
-        console.log('Cliente não encontrado no histórico.');
+      clienteIdLocal = clienteId;
+      if (!clienteIdLocal) {
+        console.error('ID do cliente não encontrado.');
         setLoading(false);
         return;
       }
@@ -138,7 +138,7 @@ const salvarCliente = async () => {
     // 4. Criar o pedido
     const pedido = {
       produto: id, // ID do produto que está na URL
-      cliente: clienteId, // ID do cliente (novo ou existente)
+      cliente: clienteIdLocal, // ID do cliente (novo ou existente)
       quantidade: quantidade,
       total: precoTotal,
       status: 'Em processamento...',

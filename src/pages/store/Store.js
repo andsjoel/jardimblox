@@ -4,6 +4,8 @@ import ProdutoCard from '../../components/productCard/productCard';
 import './store.css';
 import bgStore from '../../assets/images/background/background_store.png'
 import Header from '../../components/header/Header';
+import LogoReduzida from '../../assets/logos/logo_reduzida.svg';
+
 
 const Store = () => {
   const [produtos, setProdutos] = useState([]);
@@ -47,7 +49,7 @@ const Store = () => {
 
         {loading ? (
           <div className="loading-container">
-            <div className="loading-spinner"></div>
+            <img src={LogoReduzida} alt='logo reduzida rodando informando carregamento'/>
           </div>
         ) : (
           <div className="lista-produtos">
