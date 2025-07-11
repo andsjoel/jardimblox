@@ -1,5 +1,4 @@
 // import React, { useState, useEffect } from 'react';
-import LogoReduzida from '../../assets/logos/logo_reduzida.svg';
 import { AiFillCloseCircle } from "react-icons/ai";
 
 

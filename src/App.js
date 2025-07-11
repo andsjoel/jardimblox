@@ -5,7 +5,6 @@ import './App.css';
 import Admin from './pages/admin/Admin';
 import PrivateRoute from './components/privateRoute/PrivateRoute';
 import Painel from './pages/painel/Painel';
-import Contact from './pages/contact/Contact';
 import ProductDetail from './pages/ProductDetail/ProductDetail';
 import Community from './pages/Community/Community';
 

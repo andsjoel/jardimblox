@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { databases } from '../../service/appwrite'; // Serviço para pegar os dados da API
 import { Query } from 'appwrite'; // Importando Query
 import { FaPlus, FaMinus, FaTruck, FaShieldAlt, FaUndo, FaHeadset, FaCheckCircle } from 'react-icons/fa'
 import './productDetail.css';
 import Header from '../../components/header/Header';
 import ModalCompra from '../../components/modalCompra/ModalCompra'; // Importando o ModalCompra
+import LogoReduzida from '../../assets/logos/logo_reduzida.svg';
 
 const ProductDetail = () => {
   const { id } = useParams();  // Obtém o ID do produto da URL
-  const navigate = useNavigate();
   const [produto, setProduto] = useState(null);
-  const [pedido, setPedido] = useState(null)
   const [quantidade, setQuantidade] = useState(1); // Estado para controlar a quantidade
   const [precoTotal, setPrecoTotal] = useState(0); // Estado para calcular o preço total
   const [showModal, setShowModal] = useState(false); // Controla a exibição do modal
@@ -19,7 +18,6 @@ const ProductDetail = () => {
   const [nome, setNome] = useState('');
   const [celular, setCelular] = useState('');
   const [isClienteExistente, setIsClienteExistente] = useState(false);
-  const [historicoPedidos, setHistoricoPedidos] = useState([]);
   const [pesquisando, setPesquisando] = useState(false); // Controla a exibição de "Pesquisando..."
   const [isEmailPesquisado, setIsEmailPesquisado] = useState(false); // Controla se o e-mail foi pesquisado
   const [loading, setLoading] = useState(false);
@@ -31,48 +29,47 @@ const ProductDetail = () => {
   const PRODUCTS_COLLECTION_ID = process.env.REACT_APP_COLLECTION_PRODUTOS;
   const CLIENTS_COLLECTION_ID = process.env.REACT_APP_COLLECTION_CLIENTS;
 
-  // Função para buscar o produto com base no ID
   useEffect(() => {
     const fetchProduto = async () => {
       try {
         const res = await databases.getDocument(DATABASE_ID, PRODUCTS_COLLECTION_ID, id);
         setProduto(res);
-        setPrecoTotal(res.preco); // Define o preço total inicial com o preço do produto
+        setPrecoTotal(res.preco);
       } catch (error) {
         console.error('Erro ao buscar produto:', error);
       }
     };
 
     fetchProduto();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
-    // Função que chama a API backend para criar preferência Mercado Pago
 const iniciarCheckoutMercadoPago = async (pedidoId) => {
   
-  try {
-    const res = await fetch('/api/checkout', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        title: produto.nome,
-        quantity: quantidade,
-        price: produto.preco,
-        pedidoId: pedidoId,
-      }),
-    });
+  // try {
+  //   const res = await fetch('/api/checkout', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({
+  //       title: produto.nome,
+  //       quantity: quantidade,
+  //       price: produto.preco,
+  //       pedidoId: pedidoId,
+  //     }),
+  //   });
 
-    const data = await res.json();
+  //   const data = await res.json();
 
-    if (data.init_point) {
-      window.location.href = data.init_point; // redireciona para o checkout do Mercado Pago
-    } else {
-      console.error('Resposta inválida da API:', data);
-    }
-  } catch (error) {
-    console.error('Erro ao chamar API checkout:', error);
-  }
+  //   if (data.init_point) {
+  //     window.location.href = data.init_point; // redireciona para o checkout do Mercado Pago
+  //   } else {
+  //     console.error('Resposta inválida da API:', data);
+  //   }
+  // } catch (error) {
+  //   console.error('Erro ao chamar API checkout:', error);
+  // }
 };
 
 
@@ -89,7 +86,6 @@ const iniciarCheckoutMercadoPago = async (pedidoId) => {
         setIsClienteExistente(true);
         setNome(cliente.nome);
         setCelular(cliente.celular);
-        setHistoricoPedidos(cliente.pedidos || []);
         setClienteId(cliente.$id)
       } else {
         setIsClienteExistente(false);
@@ -213,7 +209,9 @@ const salvarCliente = async () => {
 
   // Se o produto não for encontrado ou estiver carregando
   if (!produto) {
-    return <div>Carregando...</div>;
+    return <div className="loading-container">
+              <img src={LogoReduzida} alt='logo reduzida rodando informando carregamento'/>
+            </div>;
   }
 
   return (

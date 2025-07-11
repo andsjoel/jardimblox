@@ -44,3 +44,8 @@ body {
   /* height: 400vh; */
   font-family: 'Albert';
 }
+
+body img {
+  -webkit-user-drag: none;
+  user-drag: none;
+}

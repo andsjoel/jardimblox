@@ -1,17 +1,39 @@
 /* community.css */
+.community-section {
+  width: 100%;
+  height: 100%;
+  background-image: url('../../assets/images/background/bg_tile.jpg'); /* substitua com o path real */
+  background-repeat: repeat; /* faz a imagem se repetir */
+  background-position: center;
+  background-size: 30%; /* ou experimente 'contain' ou '100px' dependendo do tile */
+}
 
 .community-container {
   padding: 2rem;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  /* background: #f4f7fa; */
   color: white;
-  /* color: #333; */
   padding-top: 100px;
+  /* background-color: rgba(0, 0, 0, 0.466); */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.community-container .box {
+  backdrop-filter: blur(5px);
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
 }
 
 .hero-section {
   text-align: center;
   margin-bottom: 3rem;
+  /* width: 80%; */
 }
 
 .hero-section h1 {
@@ -20,7 +42,7 @@
 }
 
 .hero-section p {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   max-width: 600px;
   margin: 0 auto;
 }
@@ -34,14 +56,16 @@
 }
 
 .feature-card {
-  background: rgb(183, 226, 186);
+  background: #4caf50;
   padding: 2rem;
   border-radius: 12px;
   width: 300px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  color: #0d5c2a;
+  color: #053115;
+  position: relative;
+  margin-top: 88px;
 }
 
 .feature-card:hover {
@@ -49,25 +73,42 @@
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
 }
 
+.feature-card img {
+  position: absolute;
+  top:-80px;
+  right: 0;
+  z-index: -10;
+}
+
 .feature-icon {
   font-size: 2.5rem;
-  color: #4b6cb7;
+  color: #ffffff;
   margin-bottom: 1rem;
 }
 
 .feature-card h3 {
   margin-bottom: 0.5rem;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
 }
 
 .feature-card p {
   font-size: 1rem;
-  color: #666;
+  color: #0c0c0c;
+  font-weight: 600;
 }
 
 .contact-links {
   text-align: center;
-  margin-top: 2rem;
+  margin: 2rem 0;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  /* background-color: red; */
+  /* padding: 0 4rem; */
+}
+
+.text-contact {
+  width: 60%;
 }
 
 .contact-links h2 {
@@ -76,7 +117,7 @@
 }
 
 .contact-links p {
-  font-size: 1.1rem;
+  font-size: 1.rem;
   margin-bottom: 1.5rem;
 }
 
@@ -99,14 +140,65 @@
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.contact-link.discord {
-  background-color: #5865f2;
+.discord-button-comm {
+  display: flex;
+  align-items: center;
+  background-color: var(--color-discord);
   color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.3s, transform 0.5s ease;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
 }
 
-.contact-link.whatsapp {
-  background-color: #25d366;
-  color: white;
+.discord-button-comm::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  left: -100px;
+  right: -100px;
+  bottom: -100px;
+  background: conic-gradient(
+    from 0deg,
+    #ffffff,
+    #5865f2,
+    #27ae60,
+    #ffffff
+  );
+  border-radius: 10px;
+  z-index: -1;
+  animation: spin 3s linear infinite;
+}
+
+.discord-button-comm::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  right: 4px;
+  bottom: 4px;
+  background: var(--color-discord);
+  border-radius: 6px;
+  z-index: -1;
+}
+
+.discord-button-comm .icon {
+  font-size: 4rem;
+}
+
+.discord-button-comm span {
+  font-size: 1.1rem;
+  /* background-color: red; */
+  width: 120px;
+  /* height: 50px; */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
 }
 
 .contact-link:hover {
@@ -128,4 +220,15 @@
     flex-direction: column;
     align-items: center;
   }
+
+  .contact-links {
+    text-align: center;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .text-contact {
+  width: 100%;
+}
 }
