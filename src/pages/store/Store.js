@@ -53,7 +53,7 @@ const Store = () => {
             <img src={LogoReduzida} alt='logo reduzida rodando informando carregamento'/>
           </div>
         ) : (
-          <div className="lista-produtos">
+          <div className="lista-produtos-store">
             {produtos.map(prod => (
               <ProdutoCard
                 key={prod.$id}

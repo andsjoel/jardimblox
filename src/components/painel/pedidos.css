@@ -1,132 +1,184 @@
-/* Estilo para o container principal da página */
+/* pedidos.css */
+
+/* Container principal */
 .pedidos-container {
-  padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
+  max-width: 960px;
+  margin: 2rem auto;
+  padding: 0 1rem 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333333;
 }
 
-/* Estilo para o título da página */
+/* Título */
 .pedidos-container h1 {
+  font-weight: 700;
   font-size: 2rem;
-  color: #333;
-  margin-bottom: 20px;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #4a90e2;
 }
 
-/* Estilo da barra de pesquisa */
+/* Barra de pesquisa */
 .search-bar {
   display: flex;
-  align-items: center;
-  margin-bottom: 20px;
+  justify-content: center;
+  margin-bottom: 2rem;
+  gap: 0.5rem;
 }
 
 .search-bar input {
-  padding: 8px;
-  font-size: 16px;
-  width: 250px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  flex: 1;
+  max-width: 400px;
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #e1e4e8;
+  border-radius: 4px 0 0 4px;
+  outline-offset: 2px;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.search-bar input:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 4px #d0e6ff;
 }
 
 .search-button {
-  background-color: #4CAF50;
+  background-color: #4a90e2;
+  color: #fff;
   border: none;
-  color: white;
-  padding: 8px 12px;
-  margin-left: 10px;
-  border-radius: 5px;
+  padding: 0 1.2rem;
+  font-size: 1.2rem;
   cursor: pointer;
+  border-radius: 0 4px 4px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
 }
 
 .search-button:hover {
-  background-color: #45a049;
+  background-color: #357ABD;
 }
 
-/* Estilos para a tabela de pedidos */
+/* Tabela */
 .pedidos-table {
   width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-  border: 1px solid #ddd;
+  border-collapse: separate;
+  border-spacing: 0 0.75rem;
+  font-size: 0.95rem;
+  table-layout: fixed;
 }
 
-.pedidos-table th,
-.pedidos-table td {
-  padding: 10px;
-  text-align: left;
-  border: 1px solid #ddd;
-}
-
-.pedidos-table th {
-  background-color: #f2f2f2;
-  font-weight: bold;
-}
-
-.pedidos-table tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
-
-/* Estilos para a célula de "Entregue" */
-.pedidos-table td button {
-  background-color: green;
-  border: none;
+.pedidos-table thead tr {
+  background-color: #4a90e2;
   color: white;
-  padding: 5px 10px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.pedidos-table td button:hover {
-  background-color: darkgreen;
-}
-
-/* Estilo para os ícones de confirmação */
-.pedidos-table td svg {
-  cursor: pointer;
-  color: green;
-  font-size: 20px;
-}
-
-.pedidos-table td svg:hover {
-  color: darkgreen;
-}
-
-/* Estilo para as células de e-mail */
-.pedidos-table td {
-  font-size: 14px;
-}
-
-/* Estilo geral da página */
-.pedidos-container {
-  background-color: #fff;
+  font-weight: 600;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Tabelas responsivas para dispositivos menores */
-@media screen and (max-width: 768px) {
-  .pedidos-table th,
-  .pedidos-table td {
-    font-size: 12px;
-    padding: 8px;
-  }
-
-  .search-bar input {
-    width: 200px;
-  }
-
-  .search-button {
-    padding: 6px 10px;
-  }
+.pedidos-table thead th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  user-select: none;
 }
 
+/* Linhas da tabela - cartões suaves */
+.pedidos-table tbody tr {
+  background-color: #f9fbff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.pedidos-table tbody tr:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.pedidos-table tbody td {
+  padding: 0.75rem 1rem;
+  vertical-align: middle;
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+
+/* Status com cores diferentes */
 .status-processando {
-  background-color: #1e90ff; /* Azul claro */
+  color: #3498db;
+  font-weight: 600;
 }
 
 .status-entregue {
-  background-color: #32cd32; /* Verde claro */
+  color: #2ecc71;
+  font-weight: 600;
 }
 
 .status-outro {
-  background-color: #ff6347; /* Vermelho claro */
+  color: #e74c3c;
+  font-weight: 600;
+}
+
+/* Ícones */
+.pedidos-table tbody td svg {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.pedidos-table tbody td svg:hover {
+  transform: scale(1.1);
+}
+
+/* Ajuste de espaçamento nos ícones */
+.pedidos-table tbody td svg + svg {
+  margin-left: 0.8rem;
+}
+
+/* Responsividade */
+/* Mobile: transformamos a tabela em cards */
+@media (max-width: 720px) {
+  .pedidos-table {
+    border: 0;
+  }
+
+  .pedidos-table thead {
+    display: none; /* Oculta cabeçalho da tabela */
+  }
+
+  .pedidos-table tbody tr {
+    display: block;
+    margin-bottom: 1.25rem;
+    border-radius: 10px;
+    padding: 1rem;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .pedidos-table tbody td {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #e1e4e8;
+    text-align: start;
+  }
+
+  .pedidos-table tbody td:last-child {
+    border-bottom: 0;
+    justify-content: flex-end;
+  }
+
+  /* Adiciona label antes dos dados para ficar legível */
+  .pedidos-table tbody td:nth-child(1)::before { content: "Email:"; font-weight: 600; color: #777777; }
+  .pedidos-table tbody td:nth-child(2)::before { content: "Produto:"; font-weight: 600; color: #777777; }
+  .pedidos-table tbody td:nth-child(3)::before { content: "Qtd:"; font-weight: 600; color: #777777; }
+  .pedidos-table tbody td:nth-child(4)::before { content: "Total:"; font-weight: 600; color: #777777; }
+  .pedidos-table tbody td:nth-child(5)::before { content: "Status:"; font-weight: 600; color: #777777; }
+  .pedidos-table tbody td:nth-child(6)::before { content: "Ações:"; font-weight: 600; color: #777777; }
+
+  .pedidos-table tbody td::before {
+    flex: 1;
+  }
+
+  .pedidos-table tbody td {
+    flex-wrap: nowrap;
+  }
 }

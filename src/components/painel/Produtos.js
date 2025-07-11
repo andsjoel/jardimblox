@@ -3,6 +3,7 @@ import './produtos.css';
 import { databases, storage, ID } from '../../service/appwrite';
 import ProdutoCard from '../productCard/productCard';
 
+
 const Produtos = () => {
   const [produtos, setProdutos] = useState([]);
   const [form, setForm] = useState({
@@ -177,69 +178,82 @@ const Produtos = () => {
     <div className="produtos-container">
       <h2>Cadastrar Produto</h2>
 
-      <form className="produto-form" onSubmit={handleSubmit}>
-        <div className="imagem-container">
-          <input
-            type="file"
-            name="imagem"
-            accept="image/*"
-            onChange={handleChange}
-            required={!editId}
+<form className="produto-form" onSubmit={handleSubmit}>
+  <div className="form-wrapper">
+    <div className="imagem-container">
+      <label htmlFor="upload-imagem" className="custom-file-upload">
+        Escolher Imagem
+      </label>
+      <input
+        id="upload-imagem"
+        type="file"
+        name="imagem"
+        accept="image/*"
+        onChange={handleChange}
+        required={!editId}
+      />
+      <div className="preview-imagem">
+        {form.imagem && (
+          <img
+            src={
+              typeof form.imagem === 'string'
+                ? form.imagem
+                : URL.createObjectURL(form.imagem)
+            }
+            alt="Pré-visualização"
           />
-          <div className="preview-imagem">
-          {form.imagem && (
-            <img
-              src={typeof form.imagem === 'string' ? form.imagem : URL.createObjectURL(form.imagem)}
-              alt="Pré-visualização"
-            />
-          )}
-          </div>
-        </div>
+        )}
+      </div>
+    </div>
 
-        <div className="detalhes-produto">
-          <input
-            type="text"
-            name="nome"
-            placeholder="Nome"
-            value={form.nome}
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="text"
-            name="preco"
-            placeholder="Preço"
-            value={form.preco}
-            onChange={handlePrecoChange}
-            required
-          />
-          <input
-            type="number"
-            name="estoque"
-            placeholder="Estoque"
-            value={form.estoque}
-            onChange={handleChange}
-            required
-          />
-          <textarea
-            name="descricao"
-            placeholder="Descrição"
-            value={form.descricao}
-            onChange={handleChange}
-            required
-          />
-        </div>
+    <div className="detalhes-produto">
+      <input
+        type="text"
+        name="nome"
+        placeholder="Nome"
+        value={form.nome}
+        onChange={handleChange}
+        required
+      />
+      <input
+        type="number"
+        name="preco"
+        placeholder="Preço"
+        value={form.preco}
+        onChange={handlePrecoChange}
+        required
+      />
+      <input
+        type="number"
+        name="estoque"
+        placeholder="Estoque"
+        value={form.estoque}
+        onChange={handleChange}
+        required
+      />
+      <textarea
+        name="descricao"
+        placeholder="Descrição"
+        value={form.descricao}
+        onChange={handleChange}
+        required
+      />
+    </div>
+  </div>
 
-        <button type="submit" disabled={uploading}>
-          {uploading ? 'Salvando...' : editId ? 'Salvar Alterações' : 'Adicionar Produto'}
-        </button>
-      </form>
+  <div className="botao-wrapper">
+    <button type="submit" disabled={uploading}>
+      {uploading ? 'Salvando...' : editId ? 'Salvar Alterações' : 'Adicionar Produto'}
+    </button>
+  </div>
+</form>
+
 
       <h2>Produtos Cadastrados</h2>
       {produtos.length === 0 ? (
         <p className="nenhum">Nenhum produto cadastrado.</p>
       ) : (
-        <div className="lista-produtos">
+        <div className="lista-produtos-adm">
           {produtos.map(prod => (
             <ProdutoCard
               key={prod.$id}

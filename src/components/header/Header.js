@@ -48,7 +48,7 @@ const Header = () => {
       </nav>
 
         <a
-          href="https://discord.com"
+          href="https://discord.com/invite/xnSVVaa5VJ"
           target="_blank"
           rel="noopener noreferrer"
           className="discord-button b"

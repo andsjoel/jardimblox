@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaDiscord, FaWhatsapp, FaUsers, FaComments, FaHandsHelping } from 'react-icons/fa';
+import { FaDiscord, FaUsers, FaComments, FaHandsHelping } from 'react-icons/fa';
 
 import LogoReduzida from '../../assets/logos/logo_reduzida.svg';
 
@@ -26,7 +26,7 @@ const Community = () => {
                     </div>
                     <div className="contact-buttons">
                         <a
-                        href="https://discord.com"
+                        href="https://discord.com/invite/xnSVVaa5VJ"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="discord-button-comm b"

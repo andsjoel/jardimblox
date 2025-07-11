@@ -46,11 +46,11 @@ const ProdutoCard = ({ produto, isAdmin, onClickOutside, isExpanded, onClick, on
 
       {isVisible && (
         <div className="descricao">
-          {isAdmin && <p><strong>Descrição:</strong> {produto.descricao}</p>}
           {isAdmin && (
             <div className="actions">
               <button className="editar" onClick={(e) => {
                 e.stopPropagation(); // evita colapsar o card
+                window.scrollTo({ top: 0, behavior: 'smooth' });
                 onEdit();
               }}>
                 Editar
