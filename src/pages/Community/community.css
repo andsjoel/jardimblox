@@ -10,7 +10,6 @@
 
 .community-container {
   padding: 2rem;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: white;
   padding-top: 100px;
   /* background-color: rgba(0, 0, 0, 0.466); */
@@ -212,7 +211,7 @@
 }
 
 /* Responsivo */
-@media (max-width: 768px) {
+@media (max-width:600px) {
   .feature-card {
     width: 90%;
   }

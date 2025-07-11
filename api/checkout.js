@@ -29,9 +29,9 @@ export default async function handler(req, res) {
       ],
       external_reference: pedidoId,
       back_urls: {
-        success: `${origin}/sucesso`,
-        failure: `${origin}/erro`,
-        pending: `${origin}/pendente`,
+        success: `${origin}/retorno/sucesso`,
+        failure: `${origin}/retorno/erro`,
+        pending: `${origin}/retorno/pendente`,
       },
       auto_return: 'approved',
     };

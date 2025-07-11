@@ -1,0 +1,44 @@
+.retorno-section {
+  width: 100vw;
+  height: 100vh;
+  background-image: url('../../assets/images/background/bg_tile2.jpg');
+  background-position: center;
+  background-size: 40%; /* ou experimente 'contain' ou '100px' dependendo do tile */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.retorno-container {
+  padding: 2rem;
+  margin: 2rem;
+  color: rgb(77, 192, 121);
+  background-color: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0 4px 6px rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 24px;
+  backdrop-filter: blur(5px);
+  text-align: center;
+}
+
+.retorno-section img {
+    width: 40%;
+}
+
+.retorno-container .icon {
+    font-size: 42px;
+}
+
+@media (max-width:600px) {
+
+    .retorno-section {
+        background-size: 80%;
+    }
+    .retorno-section img {
+        width: 80%;
+    }
+}

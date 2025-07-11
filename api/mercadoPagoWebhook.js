@@ -1,9 +1,15 @@
 import mercadopago from 'mercadopago';
-import { databases } from '../../service/appwrite'; // ajuste o caminho
-import { Client, Databases } from 'appwrite'; // se você estiver fora do contexto React
+import { Client, Databases } from 'appwrite';
+
+mercadopago.configure({
+  access_token: process.env.MERCADO_PAGO_ACCESS_TOKEN,
+});
 
 const client = new Client();
-client.setEndpoint(process.env.APPWRITE_ENDPOINT).setProject(process.env.APPWRITE_PROJECT_ID).setKey(process.env.APPWRITE_API_KEY);
+client
+  .setEndpoint(process.env.REACT_APP_APPWRITE_ENDPOINT)
+  .setProject(process.env.REACT_APP_PROJECT_ID)
+  .setKey(process.env.APPWRITE_API_KEY); // Você precisa criar essa variável no seu .env
 
 const database = new Databases(client);
 
@@ -18,19 +24,15 @@ export default async function handler(req, res) {
   const paymentData = req.body;
 
   try {
-    // Verifica o tipo de notificação
     if (paymentData.type === 'payment') {
       const paymentId = paymentData.data.id;
 
-      const payment = await mercadopago.payment.findById(paymentId);
+      const paymentResponse = await mercadopago.payment.findById(paymentId);
+      const payment = paymentResponse.body;
 
       if (payment.status === 'approved') {
-        // Aqui você pode usar alguma lógica para encontrar o pedido correspondente
-        // Por exemplo, salvar o ID do pedido como `external_reference` na preference
-
         const pedidoId = payment.external_reference;
 
-        // Atualiza o status do pedido no Appwrite
         await database.updateDocument(
           DATABASE_ID,
           PEDIDOS_COLLECTION_ID,
