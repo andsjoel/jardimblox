@@ -46,30 +46,30 @@ const ProductDetail = () => {
 
 const iniciarCheckoutMercadoPago = async (pedidoId) => {
   
-  // try {
-  //   const res = await fetch('/api/checkout', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({
-  //       title: produto.nome,
-  //       quantity: quantidade,
-  //       price: produto.preco,
-  //       pedidoId: pedidoId,
-  //     }),
-  //   });
+  try {
+    const res = await fetch('/api/checkout', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        title: produto.nome,
+        quantity: quantidade,
+        price: produto.preco,
+        pedidoId: pedidoId,
+      }),
+    });
 
-  //   const data = await res.json();
+    const data = await res.json();
 
-  //   if (data.init_point) {
-  //     window.location.href = data.init_point; // redireciona para o checkout do Mercado Pago
-  //   } else {
-  //     console.error('Resposta inválida da API:', data);
-  //   }
-  // } catch (error) {
-  //   console.error('Erro ao chamar API checkout:', error);
-  // }
+    if (data.init_point) {
+      window.location.href = data.init_point; // redireciona para o checkout do Mercado Pago
+    } else {
+      console.error('Resposta inválida da API:', data);
+    }
+  } catch (error) {
+    console.error('Erro ao chamar API checkout:', error);
+  }
 };
 
 
