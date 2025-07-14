@@ -40,8 +40,9 @@ const FAQ = () => {
   }
 
   return (
+    <section className='faq-sec'>
+    <h2 className="faq-title">Dúvidas Frequentes</h2>
     <div className="faq-container">
-      <h2 className="faq-title">Dúvidas Frequentes</h2>
       {faqData.map((item, index) => (
         <div
           key={index}
@@ -58,6 +59,7 @@ const FAQ = () => {
         </div>
       ))}
     </div>
+    </section>
   )
 }
 

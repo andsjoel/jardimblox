@@ -1,9 +1,9 @@
 .retorno-section {
   width: 100vw;
   height: 100vh;
-  background-image: url('../../assets/images/background/bg_tile2.jpg');
-  background-position: center;
-  background-size: 40%; /* ou experimente 'contain' ou '100px' dependendo do tile */
+  /* background-image: url('../../assets/images/background/bg_tile2.jpg'); */
+  /* background-position: center; */
+  /* background-size: 40%; */
   display: flex;
   justify-content: center;
   align-items: center;

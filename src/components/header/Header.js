@@ -1,65 +1,57 @@
 import { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import { FaDiscord, FaStore, FaUserFriends  } from 'react-icons/fa';
+import { FaDiscord, FaStore } from 'react-icons/fa';
 import { AiFillHome } from 'react-icons/ai';
-
-import LogoPrincipal from '../../assets/logos/logo_sticker.svg';
-// import LogoReduzida from '../../assets/logos/logo_reduzida.svg';
+import LogoSticker from '../../assets/logos/logo_sticker.svg'
 
 import './header.css';
 
-const Header = () => {
-    const [scrolled, setScrolled] = useState(false)
+const Header = ({ activeTab, setActiveTab }) => {
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 10)
-    }
+  }
 
-    window.addEventListener('scroll', handleScroll)
+  window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   return (
     <>
       <header className={`header ${scrolled ? 'scrolled' : ''}`}>
-        <img src={LogoPrincipal} alt="Jardim Blox logo" className="logo" />
+        <nav className="nav">
+          <button
+            className={`nav-item ${activeTab === "community" ? "active" : ""}`}
+            onClick={() => setActiveTab("community")}
+            aria-label="Início"
+          >
+            <AiFillHome className='nav-icon' size={24} />
+            <span>Início</span>
+          </button>
 
-      <nav className="nav">
-        <NavLink to="/" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
-          <AiFillHome className="nav-icon" />
-          <span>Início</span>
-        </NavLink>
-
-        <NavLink to="/loja" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
-          <FaStore className="nav-icon" />
-          <span>Loja</span>
-        </NavLink>
-
-        <NavLink to="/comunidade" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
-          <FaUserFriends className="nav-icon" />
-          <span>Comunidade</span>
-        </NavLink>
-
-        {/* <NavLink to="/client" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
-          <FaUserAlt  className="nav-icon" />
-          <span>Minhas Compras</span>
-        </NavLink> */}
-      </nav>
-
+          <button
+            className={`nav-item ${activeTab === "store" ? "active" : ""}`}
+            onClick={() => setActiveTab("store")}
+            aria-label="Partidas"
+          >
+            <FaStore className='nav-icon' size={24} />
+            <span>Loja</span>
+          </button>
+        </nav>
         <a
           href="https://discord.com/invite/xnSVVaa5VJ"
           target="_blank"
           rel="noopener noreferrer"
-          className="discord-button b"
+          className="discord-button"
         >
           <FaDiscord className="icon" />
           <span>Entrar no Discord</span>
         </a>
       </header>
-      
-    </>
-  )
-}
+      <img src={LogoSticker} alt='Logo Jardim Blox Sticker' className='logo-home' />
+      </>
+  );
+};
 
-export default Header
+export default Header;

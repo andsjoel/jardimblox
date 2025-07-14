@@ -9,8 +9,8 @@
   --color-bg-tertiary: #65496d;
 
   --color-primary: #171717;
-  --color-primary-light: #3e5e50;
-  --color-primary-dark: #0d2219;
+  --color-primary-light: #e7efda;
+  --color-primary-medium: #4caf50;
 
   --color-secondary: #6c757d;
   --color-secondary-light: #a1a6ab;
@@ -47,5 +47,5 @@ body {
 
 body img {
   -webkit-user-drag: none;
-  user-drag: none;
+  /* user-drag: none; */
 }

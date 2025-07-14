@@ -1,5 +1,6 @@
 .catalogo-container {
-  width: 100%;
+  /* width: 100vw; */
+  margin-top: 240px;
 }
 
 .store-banner-container {
@@ -15,18 +16,6 @@
   object-fit: cover;
   object-position: center 90%;
   display: block;
-}
-
-.store-banner-container::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 5px;
-  width: 100%;
-  background: linear-gradient(90deg, transparent, #ffffff, transparent);
-  background-size: 200% auto;
-  animation: move-line 2s linear infinite;
 }
 
 .catalogo-title {
@@ -54,7 +43,7 @@
   justify-items: center;   /* Centraliza conteúdo de cada célula */
   max-width: 900px;         /* Define largura máxima */
   margin: 0 auto;           /* Centraliza o grid dentro do container pai */
-  margin-top: 30px;
+  /* margin-top: 30px; */
   padding: 2rem 1rem;
 }
 
@@ -77,6 +66,10 @@
 }
 
 @media (max-width: 600px) {
+  .catalogo-container {
+    margin-top: 180px;
+  }
+
   .store-banner-container {
     height: 20vh;
   }
@@ -101,4 +94,21 @@
   margin-top: 100px;
 }
 
+
+.filter {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0 1rem;
+}
+
+.filtro-input {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  width: 100%;
+  max-width: 300px;
+  border-radius: 8px;
+  border: 1px solid #cccccc;
+  outline: none;
+  transition: border-color 0.3s;
+}
 

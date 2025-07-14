@@ -22,7 +22,7 @@ export default function RetornoPagamento() {
     pendente: {
       texto: 'Pagamento pendente, estamos aguardando a confirmação.',
       icone: <FaHourglassHalf />,
-      message: 'Hmmm... As vezes o banco demora a processar o pagamento...',
+      message: 'Hmmm... Às vezes o banco demora para processar o pagamento...',
     },
   };
 

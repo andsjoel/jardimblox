@@ -1,15 +1,6 @@
-/* community.css */
-.community-section {
-  width: 100%;
-  height: 100%;
-  background-image: url('../../assets/images/background/bg_tile.jpg'); /* substitua com o path real */
-  background-repeat: repeat; /* faz a imagem se repetir */
-  background-position: center;
-  background-size: 30%; /* ou experimente 'contain' ou '100px' dependendo do tile */
-}
-
 .community-container {
-  padding: 2rem;
+  margin-top: 200px;
+  /* padding: 1rem; */
   color: white;
   padding-top: 100px;
   /* background-color: rgba(0, 0, 0, 0.466); */
@@ -17,22 +8,27 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 .community-container .box {
-  backdrop-filter: blur(5px);
-  background-color: rgba(0, 0, 0, 0.7);
-  padding: 2rem;
-  border-radius: 24px;
+  /* backdrop-filter: blur(5px); */
+  /* background-color: rgba(0, 0, 0, 0.7); */
+  /* padding: 0 2rem; */
+  /* border-radius: 24px; */
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   /* align-items: center; */
+  /* background-color: red; */
+  width: 100%;
 }
 
 .hero-section {
-  text-align: center;
+  text-align: start;
   margin-bottom: 3rem;
-  /* width: 80%; */
+  width: 80%;
 }
 
 .hero-section h1 {
@@ -43,7 +39,6 @@
 .hero-section p {
   font-size: 1.4rem;
   max-width: 600px;
-  margin: 0 auto;
 }
 
 .community-features {
@@ -98,12 +93,17 @@
 
 .contact-links {
   text-align: center;
-  margin: 2rem 0;
+  margin: 3rem 0;
+  padding: 4rem 2rem;
   display: flex;
   justify-content: space-around;
+  align-items: center;
   width: 100%;
+  background-color: rgb(12, 12, 59);
   /* background-color: red; */
   /* padding: 0 4rem; */
+  /* border-top: 1px solid white;
+  border-bottom: 1px solid white; */
 }
 
 .text-contact {
@@ -212,6 +212,11 @@
 
 /* Responsivo */
 @media (max-width:600px) {
+
+  .community-container {
+    margin-top: 100px;
+  }
+
   .feature-card {
     width: 90%;
   }

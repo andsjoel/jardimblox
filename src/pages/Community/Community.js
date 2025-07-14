@@ -3,17 +3,18 @@ import { FaDiscord, FaUsers, FaComments, FaHandsHelping } from 'react-icons/fa';
 
 import LogoReduzida from '../../assets/logos/logo_reduzida.svg';
 
-import Header from '../../components/header/Header';
+import FAQ from '../../components/faq/Faq';
+
 import './community.css';
 
 const Community = () => {
     return (
         <section className='community-section'>
-            <Header />
             <div className="community-container">
                 <div className='box'>
+
                 <section className="hero-section">
-                    <h1>Bem-vindo à Nossa Comunidade!</h1>
+                    <h1>Bem-vindo à nossa comunidade!</h1>
                     <p>
                         Aqui é o espaço perfeito para se conectar, aprender, compartilhar e crescer junto com outros membros!
                     </p>
@@ -57,6 +58,8 @@ const Community = () => {
                         <p>Precisa de ajuda? Nossa equipe está disponível no Discord e WhatsApp para dar suporte sempre que necessário.</p>
                     </div>
                 </section>
+
+                <FAQ />
 
                 </div>
             </div>

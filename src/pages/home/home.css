@@ -1,24 +1,33 @@
 .home-container {
   text-align: center;
-  /* margin-top: 60px; */
-  width: 100%;
+  width: 100vw;
+  height: 100vh;
+  /* background-color: red; */
+  overflow: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE e Edge */
 }
 
 .home-hero {
-  position: relative;
+  /* position: relative; */
+  padding-top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Imagem de fundo/banner */
-.home-banner {
-  width: 100%;
+.home-logo {
+  width: 50%;
   max-height: 500px;
   object-fit: cover;
   display: block;
   object-position: center 30%;
+  /* box-shadow: 10px 10px 14px rgba(0,0,0,0.5); */
 }
 
 /* Botão sobreposto à imagem */
-.btn-loja {
+/* .btn-loja {
   width: 50%;
   position: absolute;
   bottom: 20px;
@@ -41,10 +50,10 @@
     background-color 0.3s ease,
     transform 0.3s ease,
     box-shadow 0.3s ease;
-}
+} */
 
 /* Efeito de reflexo (shine) */
-.btn-loja::before {
+/* .btn-loja::before {
   content: '';
   position: absolute;
   top: 0;
@@ -59,26 +68,26 @@
   );
   transform: skewX(-20deg);
   animation: shine 2s infinite;
-}
+} */
 
-@keyframes shine {
+/* @keyframes shine {
   0% {
     left: -75%;
   }
   100% {
     left: 125%;
   }
-}
+} */
 
-.btn-loja:hover {
+/* .btn-loja:hover {
   background-color: #114e2b;
   transform: translateX(-50%) scale(1.05);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
-}
+} */
 
 @media (max-width: 600px) {
-  .home-banner {
-    margin-top: 40px;
+  .home-logo {
+    width: 90%;
   }
 
   .btn-loja {
