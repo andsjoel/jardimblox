@@ -1,6 +1,6 @@
 .catalogo-container {
   /* width: 100vw; */
-  margin-top: 240px;
+  /* margin-top: 240px; */
 }
 
 .store-banner-container {
@@ -57,17 +57,9 @@
   }
 }
 
-
-/* Responsividade */
-@media (max-width: 900px) {
-  .lista-produtos {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
 @media (max-width: 600px) {
   .catalogo-container {
-    margin-top: 180px;
+    /* margin-top: 180px; */
   }
 
   .store-banner-container {

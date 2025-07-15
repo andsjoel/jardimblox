@@ -1,34 +1,29 @@
 .community-container {
-  margin-top: 200px;
-  /* padding: 1rem; */
+  margin-top: 2rem;
   color: white;
   padding-top: 100px;
-  /* background-color: rgba(0, 0, 0, 0.466); */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
+  padding: 0 15%;
 }
 
 .community-container .box {
-  /* backdrop-filter: blur(5px); */
-  /* background-color: rgba(0, 0, 0, 0.7); */
-  /* padding: 0 2rem; */
-  /* border-radius: 24px; */
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* align-items: center; */
-  /* background-color: red; */
   width: 100%;
 }
 
 .hero-section {
   text-align: start;
   margin-bottom: 3rem;
-  width: 80%;
+  width: 100%;
+  max-width: 1180px;
 }
 
 .hero-section h1 {
@@ -36,9 +31,17 @@
   margin-bottom: 1rem;
 }
 
+.hero-section div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .hero-section p {
   font-size: 1.4rem;
   max-width: 600px;
+  border-left: 2px dashed white;
+  padding-left: 1rem;
 }
 
 .community-features {
@@ -46,14 +49,16 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 2rem;
-  margin-bottom: 3rem;
+  margin: 3rem 0;
+  /* background-color: red; */
+  max-width: 1180px;
 }
 
 .feature-card {
   background: #4caf50;
   padding: 2rem;
   border-radius: 12px;
-  width: 300px;
+  width: 30%;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -62,10 +67,7 @@
   margin-top: 88px;
 }
 
-.feature-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-}
+
 
 .feature-card img {
   position: absolute;
@@ -91,61 +93,14 @@
   font-weight: 600;
 }
 
-.contact-links {
-  text-align: center;
-  margin: 3rem 0;
-  padding: 4rem 2rem;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 100%;
-  background-color: rgb(12, 12, 59);
-  /* background-color: red; */
-  /* padding: 0 4rem; */
-  /* border-top: 1px solid white;
-  border-bottom: 1px solid white; */
-}
-
-.text-contact {
-  width: 60%;
-}
-
-.contact-links h2 {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
-  color: #a0a7f0;
-}
-
-.contact-links p {
-  font-size: 1.rem;
-  margin-bottom: 1.5rem;
-}
-
-.contact-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  flex-wrap: wrap;
-}
-
-.contact-link {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 500;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
 
 .discord-button-comm {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   background-color: var(--color-discord);
   color: white;
-  padding: 0.5rem 1rem;
+  padding: 1rem;
   border-radius: 6px;
   text-decoration: none;
   font-weight: 500;
@@ -214,7 +169,20 @@
 @media (max-width:600px) {
 
   .community-container {
-    margin-top: 100px;
+    /* margin-top: 100px; */
+    padding: 1rem;
+  }
+
+  .hero-section div {
+    flex-direction: column;
+  }
+
+  .hero-section p {
+    margin-bottom: 2rem;
+  }
+
+  .hero-section h1 {
+    font-size: 2.2rem;
   }
 
   .feature-card {

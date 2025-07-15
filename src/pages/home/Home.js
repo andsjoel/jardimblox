@@ -53,7 +53,7 @@ const Home = () => {
           animate="animate"
           exit="exit"
           transition={{ duration: 0.3 }}
-          style={{ position: "absolute", width: "100%" }}
+          style={{ width: "100%" }}
         >
           <Component />
         </motion.div>
@@ -61,9 +61,9 @@ const Home = () => {
   )
 }
   return (
-      <div className="home-container" style={{ position: "relative", paddingBottom: "60px", minHeight: "100vh", overflowX: "hidden" }}>
-      {renderContent()}
+      <div className="home-container">
       <Header activeTab={activeTab} setActiveTab={setActiveTab} />
+      {renderContent()}
     </div>
   )
 }
