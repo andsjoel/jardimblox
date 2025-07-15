@@ -42,8 +42,8 @@ const Community = () => {
                     </div>
                 </section>
 
-                <section className="community-features">
-                    <div className="feature-card" >
+                <section className="community-features" data-aos="fade-up">
+                    <div className="feature-card">
                         <img src={LogoReduzida} alt='logo reduzida da jardim blox' />
                         <FaUsers className="feature-icon" />
                         <h3>Conecte-se com Membros</h3>

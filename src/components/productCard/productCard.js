@@ -1,29 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FaShoppingCart } from 'react-icons/fa';
+
+import IconLogo from '../../assets/logos/logo_reduzida.svg'
 import './product-card.css';
 
-const ProdutoCard = ({ produto, isAdmin, onClickOutside, isExpanded, onClick, onDelete, onEdit }) => {
-  const [isVisible, setIsVisible] = useState(isExpanded);
-
+const ProdutoCard = ({ produto, isAdmin, onClick, onDelete, onEdit }) => {
   const navigate = useNavigate();
-
-  useEffect(() => {
-    setIsVisible(isExpanded);
-  }, [isExpanded]);
 
   return (
     <div
-      className={`card-produto ${isExpanded ? 'expandido' : ''} ${isAdmin ? 'admin' : 'usuario'}`}
+      className={`card-produto ${isAdmin ? 'admin' : 'usuario'}`}
       onClick={onClick}
-      onAnimationEnd={() => {
-        if (!isVisible) {
-          onClickOutside();  // Fechar card quando a animação terminar
-        }
-      }}
     >
-      <img src={produto.imagem} alt={produto.nome} />
+      <img className='product-icon' src={IconLogo} alt='icone da jardim blox sobre a foto' />
+      <img className='product-img' src={produto.imagem} alt={produto.nome} />
       <div className='name-price'>
         <h3>{produto.nome}</h3>
+        <p className='desconto'>
+          {new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+          }).format(produto.preco + 10.99)}
+        </p>
         <p className='preco'>
           {new Intl.NumberFormat('pt-BR', {
             style: 'currency',
@@ -32,37 +31,36 @@ const ProdutoCard = ({ produto, isAdmin, onClickOutside, isExpanded, onClick, on
         </p>
       </div>
       {isAdmin && <p className="estoque">Estoque: {produto.estoque}</p>}
-                {!isAdmin && (
-            <button
-              className="comprar-agora"
-              onClick={(e) => {
-                e.stopPropagation(); // para não expandir de novo
-                navigate(`/produto/${produto.$id}`);
-              }}
-            >
-              Comprar Agora
-            </button>
-          )}
+      {!isAdmin && (
+      <button
+        className="comprar-agora"
+        onClick={(e) => {
+          e.stopPropagation();
+          navigate(`/produto/${produto.$id}`);
+        }}
+      >
+        <FaShoppingCart style={{ marginRight: '8px' }} />
+        Comprar Agora
+      </button>
+      )}
 
-      {isVisible && (
+      {isAdmin && (
         <div className="descricao">
-          {isAdmin && (
-            <div className="actions">
-              <button className="editar" onClick={(e) => {
-                e.stopPropagation(); // evita colapsar o card
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                onEdit();
-              }}>
-                Editar
-              </button>
-              <button className="excluir" onClick={(e) => {
-                e.stopPropagation();
-                onDelete();
-              }}>
-                Excluir
-              </button>
-            </div>
-          )}
+          <div className="actions">
+            <button className="editar" onClick={(e) => {
+              e.stopPropagation();
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+              onEdit();
+            }}>
+              Editar
+            </button>
+            <button className="excluir" onClick={(e) => {
+              e.stopPropagation();
+              onDelete();
+            }}>
+              Excluir
+            </button>
+          </div>
         </div>
       )}
     </div>

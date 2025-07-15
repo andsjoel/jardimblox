@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { databases } from '../../service/appwrite';
 import ProdutoCard from '../../components/productCard/productCard';
 import LogoReduzida from '../../assets/logos/logo_reduzida.svg';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import './store.css';
 
 const Store = () => {
@@ -34,6 +36,11 @@ const Store = () => {
 
   useEffect(() => {
     fetchProdutos();
+
+    AOS.init({
+      duration: 1000, // duração da animação em ms
+      once: true,     // anima uma única vez ao entrar na viewport
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

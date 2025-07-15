@@ -3,16 +3,21 @@
   top: 0;
   left: 0;
   right: 0;
-  width: 100%;
+  width: 100vw;
   height: 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   color: var(--color-text-primary);
-  background-color: var(--color-primary);
+  background-color: transparent;
   transition: background-color 0.4s ease;
   z-index: 999;
   padding: 0 15%;
+}
+
+.header.scrolled {
+  background-color: #171717;
+  box-shadow: 0 0 8px 6px rgba(0, 0, 0, 0.582);
 }
 
 .discord-button {
@@ -131,9 +136,7 @@
 /* NAV - MOBILE */
 @media (max-width: 600px) {
 
-    .header {
-        background-color: var(--color-primary);
-    }
+
 
     .discord-button span {
         display: none;

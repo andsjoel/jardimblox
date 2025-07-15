@@ -11,7 +11,6 @@
   align-items: center;
   justify-content: center;
   padding: 2rem;
-  margin-top: 100px;
   width: 70%;
   background-color: #00000080;
   border-radius: 18px;
@@ -27,9 +26,14 @@
 }
 
 .product-image img {
-  max-width: 300px;
-  height: auto;
-  border-radius: 8px;
+  width: 300px;      /* largura fixa padrão */
+  min-height: 300px;     /* altura fixa igual para ser quadrado */
+  max-height: 300px;
+  object-fit: cover; /* cobre toda a área, cortando o excesso */
+  object-position: center; /* centraliza a imagem no corte */
+  border-radius: 6px; /* opcional */
+  display: block;    /* remove espaços extras abaixo da imagem */
+  border: 1px solid rgb(48, 102, 52);
 }
 
 .product-info {

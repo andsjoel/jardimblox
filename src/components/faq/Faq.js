@@ -40,7 +40,7 @@ const FAQ = () => {
   }
 
   return (
-    <section className='faq-sec'>
+    <section className='faq-sec' data-aos="zoom-in">
     <h2 className="faq-title">Dúvidas Frequentes</h2>
     <div className="faq-container">
       {faqData.map((item, index) => (

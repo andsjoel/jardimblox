@@ -216,7 +216,7 @@ const salvarCliente = async () => {
 
   return (
     <section className='product-container'>
-    <Header />
+    <Header showBackButton />
     <div className="product-detail-container">
 
       <div className="product-image">

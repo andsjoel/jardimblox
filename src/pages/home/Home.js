@@ -1,20 +1,23 @@
-// import { Link } from 'react-router-dom'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-
+import { useLocation } from "react-router-dom";
 import Header from '../../components/header/Header';
-// import bgHome from '../../assets/images/background/background_home.png'
-import FAQ from '../../components/faq/Faq';
-import LogoPrincipal from '../../assets/logos/logo_sticker.svg';
-
-
 
 import './home.css';
 import Community from "../Community/Community";
 import Store from "../store/Store";
 
+
 const Home = () => {
   const [activeTab, setActiveTab] = useState("community");
+
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state?.initialTab) {
+      setActiveTab(location.state.initialTab);
+    }
+  }, [location.state, setActiveTab]);
 
   const renderContent = () => {
     const variants = {
@@ -31,20 +34,6 @@ const Home = () => {
 
 
   return (
-    // <>
-    //   <div className='home-container'>
-        
-    //     <div className='home-hero'>
-    //       <img src={LogoPrincipal} alt="Logo da Loja Jardim Blox" className="home-logo" />
-    
-    //       {/* <Link to="/loja" className='btn-loja'>
-    //         Veja nossos produtos!
-    //       </Link> */}
-    //     </div>
-
-    //     <FAQ />
-    //   </div>
-    // </>
     <AnimatePresence mode="wait">
         <motion.div
           key={currentKey}
