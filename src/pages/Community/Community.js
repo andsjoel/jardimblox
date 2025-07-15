@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaDiscord, FaUsers, FaComments, FaHandsHelping } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useEffect } from 'react';
@@ -11,6 +12,8 @@ import FAQ from '../../components/faq/Faq';
 import './community.css';
 
 const Community = () => {
+    const navigate = useNavigate();
+
     useEffect(() => {
         AOS.init({
             duration: 1000, // duração da animação em ms
@@ -20,6 +23,12 @@ const Community = () => {
 
     return (
         <section className='community-section'>
+            <button
+                className='cta-button'
+                onClick={() => navigate('/', { state: { initialTab: 'store' } })}
+                >
+                Veja nossos produtos!
+            </button>
             <div className="community-container">
                 <div className='box'>
 

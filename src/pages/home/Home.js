@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Header from '../../components/header/Header';
 
 import './home.css';
@@ -12,12 +12,16 @@ const Home = () => {
   const [activeTab, setActiveTab] = useState("community");
 
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (location.state?.initialTab) {
       setActiveTab(location.state.initialTab);
+
+      // Limpa o state da URL (faz uma navegação "por cima", sem recarregar)
+      navigate(location.pathname, { replace: true });
     }
-  }, [location.state, setActiveTab]);
+  }, [location, navigate, setActiveTab]);
 
   const renderContent = () => {
     const variants = {

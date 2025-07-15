@@ -5,6 +5,7 @@ import LogoSticker from '../../assets/logos/logo_sticker.svg'
 
 import './header.css';
 import { useNavigate } from 'react-router-dom';
+import ImageLogo from '../img-logo/ImageLogo';
 
 const Header = ({ activeTab = '', setActiveTab = () => {}, showBackButton = false }) => {
   const [scrolled, setScrolled] = useState(false);
@@ -68,7 +69,8 @@ const Header = ({ activeTab = '', setActiveTab = () => {}, showBackButton = fals
           </a>
         )}
       </header>
-      <img src={LogoSticker} alt='Logo Jardim Blox Sticker' className='logo-home' />
+        {/* <ImageLogo /> */}
+        <img src={LogoSticker} alt='Logo Jardim Blox Sticker' className='logo-home' />
     </>
   );
 };
