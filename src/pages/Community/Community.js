@@ -56,19 +56,19 @@ const Community = () => {
                         <img src={LogoReduzida} alt='logo reduzida da jardim blox' />
                         <FaUsers className="feature-icon" />
                         <h3>Conecte-se com Membros</h3>
-                        <p>Participe de discussões, tire dúvidas e forme novas amizades com pessoas que compartilham dos mesmos interesses.</p>
+                        <p>Participe de discussões, tire dúvidas e forme novas amizades.</p>
                     </div>
                     <div className="feature-card">
                         <img src={LogoReduzida} alt='logo reduzida da jardim blox' />
                         <FaComments className="feature-icon" />
                         <h3>Fóruns e Canais</h3>
-                        <p>Temos espaços organizados para diferentes tópicos, desde suporte técnico até conversas descontraídas.</p>
+                        <p>Espaços organizados, desde suporte técnico até conversas descontraídas.</p>
                     </div>
                     <div className="feature-card">
                         <img src={LogoReduzida} alt='logo reduzida da jardim blox' />
                         <FaHandsHelping className="feature-icon" />
                         <h3>Suporte Rápido</h3>
-                        <p>Precisa de ajuda? Nossa equipe está disponível no Discord e WhatsApp para dar suporte sempre que necessário.</p>
+                        <p>Nossa equipe está disponível no Discord para dar suporte sempre que necessário.</p>
                     </div>
                 </section>
 
