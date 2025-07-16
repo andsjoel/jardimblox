@@ -1,7 +1,46 @@
 .image-logo-container {
-    /* background-color: red; */
+    margin-top: 60px;
+    gap: 1rem;
+    min-width: 370px;
 }
 
 .image-logo-container .letter {
-    width: 42px;
+    height: 68px;
+    margin: 0 3px;
+        transition: transform 0.2s ease;
+    cursor: pointer;
+}
+
+.image-logo-container .letter-J,
+.image-logo-container .letter-B {
+    margin-bottom: -14px;
+    height: 82px;
+}
+
+.image-logo-container .letter-O {
+    height: 102px;
+}
+
+@media (max-width:600px) {
+    .image-logo-container {
+        margin-top: 60px;
+        gap: .5rem;
+    }
+
+    .image-logo-container .letter {
+        height: 40px;
+        margin: 0 1px;
+            transition: transform 0.2s ease;
+        cursor: pointer;
+    }
+
+    .image-logo-container .letter-J,
+    .image-logo-container .letter-B {
+        margin-bottom: -14px;
+        height: 55px;
+    }
+
+    .image-logo-container .letter-O {
+        height: 60px;
+    }
 }
