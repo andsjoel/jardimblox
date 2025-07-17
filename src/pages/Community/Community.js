@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaDiscord, FaUsers, FaComments, FaHandsHelping } from 'react-icons/fa';
+import { FaDiscord, FaUsers, FaComments, FaHandsHelping, FaShoppingCart } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -23,13 +23,15 @@ const Community = () => {
 
     return (
         <section className='community-section'>
-            <button
-                className='cta-button'
-                onClick={() => navigate('/', { state: { initialTab: 'store' } })}
-                >
-                Veja nossos produtos!
-            </button>
+
             <div className="community-container">
+                <div
+                    className='cta-button'
+                    onClick={() => navigate('/', { state: { initialTab: 'store' } })}
+                    >
+                    <FaShoppingCart className='cart-btn' />
+                    <p>Veja nossos produtos!</p>
+                </div>
                 <div className='box'>
 
                 <section className="hero-section">
@@ -53,19 +55,19 @@ const Community = () => {
 
                 <section className="community-features" data-aos="fade-up">
                     <div className="feature-card">
-                        <img src={LogoReduzida} alt='logo reduzida da jardim blox' />
+                        <img className='orelhas-box' src={LogoReduzida} alt='logo reduzida da jardim blox' />
                         <FaUsers className="feature-icon" />
                         <h3>Conecte-se com Membros</h3>
                         <p>Participe de discussões, tire dúvidas e forme novas amizades.</p>
                     </div>
                     <div className="feature-card">
-                        <img src={LogoReduzida} alt='logo reduzida da jardim blox' />
+                        <img className='orelhas-box' src={LogoReduzida} alt='logo reduzida da jardim blox' />
                         <FaComments className="feature-icon" />
                         <h3>Fóruns e Canais</h3>
                         <p>Espaços organizados, desde suporte técnico até conversas descontraídas.</p>
                     </div>
                     <div className="feature-card">
-                        <img src={LogoReduzida} alt='logo reduzida da jardim blox' />
+                        <img className='orelhas-box' src={LogoReduzida} alt='logo reduzida da jardim blox' />
                         <FaHandsHelping className="feature-icon" />
                         <h3>Suporte Rápido</h3>
                         <p>Nossa equipe está disponível no Discord para dar suporte sempre que necessário.</p>
