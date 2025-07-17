@@ -19,7 +19,10 @@ const ImageLogo = () => {
     const containerRef = useRef(null);
     const letterRefs = useRef([]);
 
-    useEffect(() => {
+useEffect(() => {
+    const isMobile = window.matchMedia('(max-width: 600px)').matches;
+    if (!isMobile) {
+        // Mantém a lógica de interação com mouse para desktop
         const handleMouseMove = (e) => {
             const mouseX = e.clientX;
             const mouseY = e.clientY;
@@ -54,7 +57,22 @@ const ImageLogo = () => {
             document.removeEventListener('mousemove', handleMouseMove);
             document.removeEventListener('mouseleave', handleMouseLeave);
         };
-    }, []);
+    } else {
+        // Mobile: animação periódica
+        const container = containerRef.current;
+        if (!container) return;
+
+        const interval = setInterval(() => {
+            container.classList.add('animate');
+            setTimeout(() => {
+                container.classList.remove('animate');
+            }, 2400); // tempo da animação
+        }, 4000); // executa a cada 5s
+
+        return () => clearInterval(interval);
+    }
+}, []);
+
 
     return (
         <div className='image-logo-container' ref={containerRef}>
