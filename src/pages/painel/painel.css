@@ -1,30 +1,30 @@
 .painel-wrapper {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
   background-color: #171717;
   color: white;
   width: 100%;
 }
 
 .painel-conteudo {
+  margin-left: 220px; /* largura da sidebar */
+  overflow-y: auto; /* scroll só aqui */
   flex: 1;
-  /* padding: 3rem 5rem; */
-  overflow-y: auto;
-  height: 100vh;
 }
 
 .sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 220px;
+  height: 100vh; /* ocupa altura total da tela */
   background-color: #171717;
   color: white;
   padding: 2rem 1rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  height: 100%;
   border-right: 1px solid white;
+  z-index: 1000; /* pra ficar acima do conteúdo */
 }
 
 .sidebar h2 {
@@ -70,6 +70,12 @@
 /* 💡 MOBILE LAYOUT */
 /* ======================= */
 @media (max-width: 768px) {
+
+  .painel-conteudo {
+    margin-left: 0;
+    padding-top: 60px; /* para não ficar atrás da sidebar fixa no topo */
+  }
+
   .sidebar {
     flex-direction: row;
     height: auto;

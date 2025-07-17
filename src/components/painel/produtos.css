@@ -95,9 +95,9 @@ h2 {
   gap: 1rem;
 }
 
-input[type="text"],
-input[type="number"],
-textarea {
+.input-modal,
+.input-modal,
+.input-modal {
   padding: 0.75rem;
   border: 1px solid #ccc;
   border-radius: 6px;

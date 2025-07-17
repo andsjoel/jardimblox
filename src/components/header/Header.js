@@ -70,7 +70,6 @@ const Header = ({ activeTab = '', setActiveTab = () => {}, showBackButton = fals
         )}
       </header>
         <ImageLogo />
-        {/* <img src={LogoSticker} alt='Logo Jardim Blox Sticker' className='logo-home' /> */}
     </>
   );
 };

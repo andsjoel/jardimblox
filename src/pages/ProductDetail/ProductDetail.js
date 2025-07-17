@@ -189,6 +189,10 @@ const salvarCliente = async () => {
     }
   };
 
+  useEffect(() => {
+  window.scrollTo(0, 0);
+}, [id]);
+
   // Atualiza o preço total com base na quantidade
   useEffect(() => {
     if (produto) {

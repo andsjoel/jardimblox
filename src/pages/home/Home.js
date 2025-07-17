@@ -15,6 +15,11 @@ const Home = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    // Sempre que mudar de aba, rola a página para o topo
+    window.scrollTo(0, 0);
+  }, [activeTab]);
+
+  useEffect(() => {
     if (location.state?.initialTab) {
       setActiveTab(location.state.initialTab);
 

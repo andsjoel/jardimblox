@@ -196,36 +196,35 @@
   box-shadow: 0 0 8px 6px rgba(0, 0, 0, 0.582);
   border-radius: 8px;
   /* box-shadow: 0px 0px 15px rgb(0, 0, 0); */
-  height: 200px;
+  /* height: 200px; */
   /* width: 100%; */
   display: flex;
   /* flex-direction: column; */
   align-items: center;
+  justify-content: space-between	;
   transition: transform 0.3s ease, height 0.5s ease;
   cursor: pointer;
   z-index: 0;
   color: white;
   font-family: 'Albert';
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   overflow: hidden;
   margin: 2rem 0;
-}
-
-.card-produto.expandido.admin {
-  height: 295px;
+  padding: .5rem;
 }
 
 .card-produto.admin img {
   width: 40%;
-  max-width: 200px;
-  height: 200px;
+  max-width: 100px;
+  height: 100px;
   object-fit: cover;
+  border-radius: 8px;
 }
 
 .card-produto.admin .name-price {
-  margin-top: 1rem;
-  width: 60%;
-  height: 100px;
+  /* margin-top: 1rem; */
+  /* width: 60%; */
+  /* height: 100px; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -248,26 +247,30 @@
 }
 
 .card-produto.admin .estoque {
-  width: 30%;
+  /* width: 30%; */
   text-align: center;
-  font-size: 1.3rem;
-  /* background-color: red; */
+  font-size: 1rem;
 }
 
 .card-produto.admin .descricao {
-  width: 70%;
+  /* width: 70%; */
 }
 
 .card-produto.admin .actions {
   display: flex;
   justify-content: space-around;
-  width: 100%;
+  /* width: 100%; */
 }
 
 .card-produto.admin .actions {
   display: flex;
-  gap: 10px;
-  margin-top: 10px;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
+  /* gap: 10px; */
+  /* margin-top: 10px; */
+
 }
 
 .card-produto.admin .actions .editar,

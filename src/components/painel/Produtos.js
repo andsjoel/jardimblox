@@ -125,6 +125,12 @@ const Produtos = () => {
   };
 
   useEffect(() => {
+    if (editId) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [editId]);
+
+  useEffect(() => {
     fetchProdutos();
   }, []);
 
@@ -154,6 +160,10 @@ const Produtos = () => {
       descricao: produto.descricao || ''
     });
     setEditId(produto.$id);
+
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, 0);
   };
 
   const handlePrecoChange = (e) => {
@@ -191,6 +201,7 @@ const Produtos = () => {
         accept="image/*"
         onChange={handleChange}
         required={!editId}
+        className='input-modal'
       />
       <div className="preview-imagem">
         {form.imagem && (
@@ -214,6 +225,7 @@ const Produtos = () => {
         value={form.nome}
         onChange={handleChange}
         required
+        className='input-modal'
       />
       <input
         type="number"
@@ -222,6 +234,7 @@ const Produtos = () => {
         value={form.preco}
         onChange={handlePrecoChange}
         required
+        className='input-modal'
       />
       <input
         type="number"
@@ -230,6 +243,7 @@ const Produtos = () => {
         value={form.estoque}
         onChange={handleChange}
         required
+        className='input-modal'
       />
       <textarea
         name="descricao"
@@ -237,6 +251,7 @@ const Produtos = () => {
         value={form.descricao}
         onChange={handleChange}
         required
+        className='input-modal'
       />
     </div>
   </div>
