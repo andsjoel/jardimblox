@@ -1,6 +1,7 @@
 import { Navigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { account } from '../../service/appwrite'; // Certifique-se de importar o cliente Appwrite corretamente
+import Loading from '../loading/Loading';
 
 const PrivateRoute = ({ children }) => {
   const [loading, setLoading] = useState(true);
@@ -22,7 +23,7 @@ const PrivateRoute = ({ children }) => {
 
   }, []);
 
-  if (loading) return <div>Carregando...</div>;
+  if (loading) return <Loading />;
 
   // Se o usuário estiver autenticado, renderiza os filhos (componente protegido)
   // Caso contrário, redireciona para o /admin (ou página de login)

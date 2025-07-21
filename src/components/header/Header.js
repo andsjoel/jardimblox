@@ -7,7 +7,7 @@ import './header.css';
 import { useNavigate } from 'react-router-dom';
 import ImageLogo from '../img-logo/ImageLogo';
 
-const Header = ({ activeTab = '', setActiveTab = () => {}, showBackButton = false }) => {
+const Header = ({ activeTab = '', setActiveTab = () => {}, showBackButton = false, dontShowLogo = false }) => {
   const [scrolled, setScrolled] = useState(false);
   const navigate = useNavigate(); // <- necessário para voltar de rota
 
@@ -69,7 +69,7 @@ const Header = ({ activeTab = '', setActiveTab = () => {}, showBackButton = fals
           </a>
         )}
       </header>
-        <ImageLogo />
+        {!dontShowLogo && <ImageLogo />}
     </>
   );
 };

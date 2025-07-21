@@ -7,6 +7,7 @@ import './productDetail.css';
 import Header from '../../components/header/Header';
 import ModalCompra from '../../components/modalCompra/ModalCompra'; // Importando o ModalCompra
 import LogoReduzida from '../../assets/logos/logo_reduzida.svg';
+import Loading from '../../components/loading/Loading';
 
 const ProductDetail = () => {
   const { id } = useParams();  // Obtém o ID do produto da URL
@@ -214,7 +215,7 @@ const salvarCliente = async () => {
   // Se o produto não for encontrado ou estiver carregando
   if (!produto) {
     return <div className="loading-container">
-              <img src={LogoReduzida} alt='logo reduzida rodando informando carregamento'/>
+              <Loading />
             </div>;
   }
 

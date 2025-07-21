@@ -5,6 +5,7 @@ import LogoReduzida from '../../assets/logos/logo_reduzida.svg';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import './store.css';
+import Loading from '../../components/loading/Loading';
 
 const Store = () => {
   const [produtos, setProdutos] = useState([]);
@@ -64,7 +65,7 @@ const Store = () => {
 
         {loading ? (
           <div className="loading-container">
-            <img src={LogoReduzida} alt='logo reduzida rodando informando carregamento' />
+            <Loading />
           </div>
         ) : (
           <div className="lista-produtos-store">

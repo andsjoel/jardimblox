@@ -1,9 +1,5 @@
 .retorno-section {
   width: 100%;
-  height: 100vh;
-  /* background-image: url('../../assets/images/background/bg_tile2.jpg'); */
-  /* background-position: center; */
-  /* background-size: 40%; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -25,9 +21,7 @@
   text-align: center;
 }
 
-.retorno-section img {
-    width: 40%;
-}
+
 
 .retorno-container .icon {
     font-size: 42px;
@@ -39,6 +33,6 @@
         background-size: 80%;
     }
     .retorno-section img {
-        width: 80%;
+        /* width: 80%; */
     }
 }

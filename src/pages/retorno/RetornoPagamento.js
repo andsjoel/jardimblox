@@ -3,6 +3,7 @@ import { FaCheckCircle, FaTimesCircle, FaHourglassHalf, FaQuestionCircle } from 
 import LogoContorno from '../../assets/logos/logo_sticker.svg';
 import './retorno.css'
 import Header from '../../components/header/Header';
+import ImageLogo from '../../components/img-logo/ImageLogo';
 
 
 export default function RetornoPagamento() {
@@ -36,10 +37,10 @@ export default function RetornoPagamento() {
 
   return (
     <>
-    <Header />
+    <Header showBackButton dontShowLogo />
     <section className='retorno-section'> 
-        <img src={LogoContorno} alt='logo sticker da jardimblox' />
-        <div className='retorno-container'>
+      <ImageLogo />
+          <div className='retorno-container'>
             <div className='icon'>{info.icone}</div>
             <h3 className='retorno-message'>{info.texto}</h3>
             <p>{info.message}</p>
