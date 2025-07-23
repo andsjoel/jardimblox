@@ -22,7 +22,6 @@ const ImageLogo = () => {
 useEffect(() => {
     const isMobile = window.matchMedia('(max-width: 600px)').matches;
     if (!isMobile) {
-        // Mantém a lógica de interação com mouse para desktop
         const handleMouseMove = (e) => {
             const mouseX = e.clientX;
             const mouseY = e.clientY;
@@ -67,7 +66,7 @@ useEffect(() => {
             setTimeout(() => {
                 container.classList.remove('animate');
             }, 2400); // tempo da animação
-        }, 4000); // executa a cada 5s
+        }, 6000); // executa a cada 5s
 
         return () => clearInterval(interval);
     }

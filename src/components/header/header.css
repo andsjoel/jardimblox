@@ -25,8 +25,8 @@
   align-items: center;
   background-color: var(--color-discord);
   color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
+  padding: 0.3rem 1rem;
+  border-radius: 12px;
   text-decoration: none;
   font-weight: 500;
   transition: background-color 0.3s, transform 0.5s ease;
@@ -34,9 +34,10 @@
   position: relative;
   overflow: hidden;
   z-index: 1;
+  border: 1px solid transparent;
 }
 
-.discord-button::before {
+/* .discord-button::before {
   content: '';
   position: absolute;
   top: -100px;
@@ -65,7 +66,7 @@
   background: var(--color-discord);
   border-radius: 6px;
   z-index: -1;
-}
+} */
 
 .discord-button .icon {
   margin-right: 0.5rem;
@@ -73,7 +74,7 @@
 }
 
 .discord-button:hover {
-  transform: scale(1.05);
+  border: 1px solid white;
 }
 
 /* NAV - DESKTOP */

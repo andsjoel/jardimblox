@@ -6,8 +6,8 @@ import { FaPlus, FaMinus, FaTruck, FaShieldAlt, FaUndo, FaHeadset, FaCheckCircle
 import './productDetail.css';
 import Header from '../../components/header/Header';
 import ModalCompra from '../../components/modalCompra/ModalCompra'; // Importando o ModalCompra
-import LogoReduzida from '../../assets/logos/logo_reduzida.svg';
 import Loading from '../../components/loading/Loading';
+import FooterComponent from '../../components/footer/Footer';
 
 const ProductDetail = () => {
   const { id } = useParams();  // Obtém o ID do produto da URL
@@ -311,7 +311,7 @@ const salvarCliente = async () => {
         </div>
       </div>
 
-
+      <FooterComponent />
     </section>
   );
 };

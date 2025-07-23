@@ -119,7 +119,6 @@ const Pedidos = () => {
     }
   };
 
-  // Função para atualizar o status do pedido para "Produto Entregue"
   const marcarComoEntregue = async (pedidoId, nomeProduto, quantidade) => {
     const confirmar = window.confirm(`Deseja realmente marcar como entregue o pedido ${nomeProduto} (${quantidade})?`);
     if (!confirmar) return;
@@ -159,9 +158,9 @@ const Pedidos = () => {
     }
   };
 
-  // Effect para carregar os pedidos ao carregar o componente
   useEffect(() => {
     fetchPedidos();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -190,7 +189,7 @@ const Pedidos = () => {
             <th>Quantidade</th>
             <th>Total</th>
             <th>Status</th>
-            <th>Pedido</th>
+            <th>Ação</th>
           </tr>
         </thead>
         <tbody>

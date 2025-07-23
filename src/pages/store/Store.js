@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { databases } from '../../service/appwrite';
 import ProdutoCard from '../../components/productCard/productCard';
-import LogoReduzida from '../../assets/logos/logo_reduzida.svg';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import './store.css';
 import Loading from '../../components/loading/Loading';
+import FooterComponent from '../../components/footer/Footer';
 
 const Store = () => {
   const [produtos, setProdutos] = useState([]);
@@ -82,6 +82,7 @@ const Store = () => {
           </div>
         )}
       </div>
+      <FooterComponent />
     </>
   );
 };

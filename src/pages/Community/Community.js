@@ -1,5 +1,5 @@
-import React from 'react';
-import { FaDiscord, FaUsers, FaComments, FaHandsHelping, FaShoppingCart } from 'react-icons/fa';
+import React, { useState } from 'react';
+import { FaDiscord, FaUsers, FaComments, FaHandsHelping, FaShoppingCart, FaTiktok, FaInstagram } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -8,11 +8,14 @@ import { useEffect } from 'react';
 import LogoReduzida from '../../assets/logos/logo_reduzida.svg';
 
 import FAQ from '../../components/faq/Faq';
+// import Footer from '../../components/footer/Footer'
 
 import './community.css';
+import FooterComponent from '../../components/footer/Footer';
 
 const Community = () => {
     const navigate = useNavigate();
+    const [online, setOnline] = useState(false);
 
     useEffect(() => {
         AOS.init({
@@ -21,35 +24,71 @@ const Community = () => {
         });
     }, []);
 
+    useEffect(() => {
+        const agora = new Date();
+        const horas = agora.getHours();
+        const minutos = agora.getMinutes();
+        const minutosDesdeMeiaNoite = horas * 60 + minutos;
+
+        // Das 10:00 (600) até 23:59 (1439)
+        if (minutosDesdeMeiaNoite >= 600 && minutosDesdeMeiaNoite <= 1439) {
+        setOnline(true);
+        } else {
+        setOnline(false);
+        }
+    }, []);
+
     return (
         <section className='community-section'>
 
             <div className="community-container">
-                <div
-                    className='cta-button'
-                    onClick={() => navigate('/', { state: { initialTab: 'store' } })}
-                    >
-                    <FaShoppingCart className='cart-btn' />
-                    <p>Veja nossos produtos!</p>
-                </div>
+<div className={`online-div ${online ? 'online-true' : 'online-false'}`}>
+    <div
+        className='cta-button'
+        onClick={() => navigate('/', { state: { initialTab: 'store' } })}
+    >
+        <FaShoppingCart className='cart-btn' />
+        <p>Veja nossos produtos</p>
+    </div>
+    <div className='online'>
+        <p>{online ? 'Estamos Online!' : 'Voltamos logo...'}</p>
+    </div>
+</div>
                 <div className='box'>
 
                 <section className="hero-section">
                     <h1 data-aos="fade-right">Bem-vindo à nossa comunidade!</h1>
-                    <div>
+                    <div className='hero-div'>
                         <p data-aos="fade-right">
                             Entre no nosso servidor do <span>DISCORD</span> e fique por dentro das novidades, eventos e da comunidade! Aqui é o espaço perfeito para se conectar, aprender, compartilhar e crescer junto com outros membros!
                         </p>
-                        <a
-                        href="https://discord.com/invite/xnSVVaa5VJ"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="discord-button-comm b"
-                        data-aos="zoom-in"
-                        >
-                            <FaDiscord className="icon" />
-                                <span>Junte-se a Nós</span>
-                        </a>
+                        <div className="social-buttons-comm" data-aos="zoom-in">
+                            <a
+                                href="https://discord.com/invite/xnSVVaa5VJ"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="discord-button-comm"
+                            >
+                                <FaDiscord className="icon" />
+                            </a>
+                            <a
+                                href="https://instagram.com/sua_pagina"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="discord-button-comm"
+                            >
+                                <FaInstagram className="icon" />
+                            </a>
+                            <a
+                                href="https://tiktok.com/@sua_pagina"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="discord-button-comm"
+                            >
+                                <FaTiktok className="icon" />
+                            </a>
+                            </div>
+
                     </div>
                 </section>
 
@@ -78,6 +117,7 @@ const Community = () => {
 
                 </div>
             </div>
+            <FooterComponent />
         </section>
     );
 };
