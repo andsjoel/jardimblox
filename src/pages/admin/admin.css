@@ -8,8 +8,7 @@
 }
 
 .admin-form {
-  background-color: #000000cc; /* fundo preto com transparência, semelhante ao usuário */
-  padding: 2.5rem 2rem;
+  background-color: #000000cc;
   border-radius: 12px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
   width: 100%;
@@ -27,7 +26,7 @@
   font-size: 1.8rem;
   letter-spacing: 1.2px;
   text-transform: uppercase;
-  color: #73abec; /* azul do preço do usuário */
+  color: #73abec;
 }
 
 .admin-form input {
@@ -56,9 +55,6 @@
   border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-}
-
-.admin-form button:hover {
 }
 
 .erro {

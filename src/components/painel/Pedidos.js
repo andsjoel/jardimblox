@@ -184,8 +184,8 @@ const Pedidos = () => {
       <table className="pedidos-table">
         <thead>
           <tr>
-            <th>Email do Cliente</th>
-            <th>Nome do Produto</th>
+            <th>Email</th>
+            <th>Produto</th>
             <th>Quantidade</th>
             <th>Total</th>
             <th>Status</th>

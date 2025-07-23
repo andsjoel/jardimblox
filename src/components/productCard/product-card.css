@@ -5,10 +5,8 @@
   border: 2px solid rgb(33, 66, 39);
   box-shadow: 0 0 8px 6px rgba(0, 0, 0, 0.582);
   border-radius: 8px;
-  /* box-shadow: 0px 0px 15px rgb(0, 0, 0); */
   overflow: hidden;
   height: 400px;
-  /* width: 100%; */
   width: 300px;
   display: flex;
   flex-direction: column;
@@ -28,15 +26,14 @@
   width: 22px;
 }
 
-
 .card-produto.usuario .product-img {
-  width: 200px;      /* largura fixa padrão */
-  min-height: 200px;     /* altura fixa igual para ser quadrado */
+  width: 200px;
+  min-height: 200px;  
   max-height: 200px;
-  object-fit: cover; /* cobre toda a área, cortando o excesso */
-  object-position: center; /* centraliza a imagem no corte */
-  border-radius: 6px; /* opcional */
-  display: block;    /* remove espaços extras abaixo da imagem */
+  object-fit: cover; 
+  object-position: center; 
+  border-radius: 6px; 
+  display: block; 
 }
 
 .card-produto.usuario .name-price {
@@ -68,11 +65,9 @@
 .card-produto.usuario .preco {
   font-weight: bold;
   width: 100%;
-  /* background-color: rgb(136, 60, 9); */
   color: #73abec;
   font-size: 1.8rem;
   text-align: end;
-  /* background-color: red; */
 }
 
 .card-produto.usuario .comprar-agora {
@@ -120,58 +115,9 @@
   }
 }
 
-/* .card-produto .descricao-completa {
-  width: 100%;
-  margin-top: 0;
-  display: none;
-} */
-
-
-/* .card-produto .actions {
-  margin-top: 1rem;
-} */
-
-/* .card-produto .comprar-agora,
-.card-produto .editar,
-.card-produto .excluir {
-  margin-top: 1rem;
-  width: 100%;
-  padding: 8px;
-  background-color: #27ae60;
-  color: white;
-  font-weight: bold;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-right: 10px;
-} */
-
-/* .card-produto .comprar-agora:hover,
-.card-produto .editar:hover,
-.card-produto .excluir:hover {
-  background-color: #219150;
-} */
-
-/* .card-produto .excluir {
-  background-color: #e74c3c;
-} */
-
 .card-produto .excluir:hover {
   background-color: #c0392b;
 }
-
-/* .estoque {
-  font-size: 0.9rem;
-  color: #666;
-  margin-bottom: 0.5rem;
-} */
-
-/* .nenhum {
-  font-style: italic;
-  color: #888;
-} */
-
 
 @keyframes aparecer {
   from {
@@ -187,19 +133,13 @@
 
 /* ############################ ADM */
 
-/* Estilo para admin */
 
 .card-produto.admin {
   background-color: #e0e0e027;
   border: 2px solid rgb(0, 0, 0);
-  /* padding: 1rem; */
   box-shadow: 0 0 8px 6px rgba(0, 0, 0, 0.582);
   border-radius: 8px;
-  /* box-shadow: 0px 0px 15px rgb(0, 0, 0); */
-  /* height: 200px; */
-  /* width: 100%; */
   display: flex;
-  /* flex-direction: column; */
   align-items: center;
   justify-content: space-between	;
   transition: transform 0.3s ease, height 0.5s ease;
@@ -207,7 +147,6 @@
   z-index: 0;
   color: white;
   font-family: 'Albert';
-  /* flex-wrap: wrap; */
   overflow: hidden;
   margin: 2rem 0;
   padding: .5rem;
@@ -222,9 +161,6 @@
 }
 
 .card-produto.admin .name-price {
-  /* margin-top: 1rem; */
-  /* width: 60%; */
-  /* height: 100px; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -247,19 +183,13 @@
 }
 
 .card-produto.admin .estoque {
-  /* width: 30%; */
   text-align: center;
   font-size: 1rem;
-}
-
-.card-produto.admin .descricao {
-  /* width: 70%; */
 }
 
 .card-produto.admin .actions {
   display: flex;
   justify-content: space-around;
-  /* width: 100%; */
 }
 
 .card-produto.admin .actions {
@@ -268,9 +198,6 @@
   justify-content: space-between;
   align-items: center;
   height: 100px;
-  /* gap: 10px; */
-  /* margin-top: 10px; */
-
 }
 
 .card-produto.admin .actions .editar,
@@ -284,7 +211,7 @@
 }
 
 .card-produto.admin .editar {
-  background-color: #4CAF50; /* verde */
+  background-color: #4CAF50;
   color: white;
 }
 
@@ -294,7 +221,7 @@
 }
 
 .card-produto.admin .excluir {
-  background-color: #f44336; /* vermelho */
+  background-color: #f44336;
   color: white;
 }
 

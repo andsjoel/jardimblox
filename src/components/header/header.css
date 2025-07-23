@@ -16,15 +16,15 @@
 }
 
 .header.scrolled {
-  background-color: #171717;
-  box-shadow: 0 0 8px 6px rgba(0, 0, 0, 0.582);
+  background-color: var(--color-bg-primary);
+  box-shadow: 0 0 8px 6px rgba(0, 0, 0, 0.58);
 }
 
 .discord-button {
   display: flex;
   align-items: center;
   background-color: var(--color-discord);
-  color: white;
+  color: var(--color-button-secondary-text);
   padding: 0.3rem 1rem;
   border-radius: 12px;
   text-decoration: none;
@@ -37,54 +37,19 @@
   border: 1px solid transparent;
 }
 
-/* .discord-button::before {
-  content: '';
-  position: absolute;
-  top: -100px;
-  left: -100px;
-  right: -100px;
-  bottom: -100px;
-  background: conic-gradient(
-    from 0deg,
-    #ffffff,
-    #5865f2,
-    #27ae60,
-    #ffffff
-  );
-  border-radius: 10px;
-  z-index: -1;
-  animation: spin 3s linear infinite;
-}
-
-.discord-button::after {
-  content: '';
-  position: absolute;
-  top: 4px;
-  left: 4px;
-  right: 4px;
-  bottom: 4px;
-  background: var(--color-discord);
-  border-radius: 6px;
-  z-index: -1;
-} */
-
 .discord-button .icon {
   margin-right: 0.5rem;
   font-size: 1.2rem;
 }
 
 .discord-button:hover {
-  border: 1px solid white;
+  border: 1px solid var(--color-button-secondary-text);
 }
-
-/* NAV - DESKTOP */
 
 .nav {
   display: flex;
   justify-content: center;
   gap: 2rem;
-  /* padding: 0 2rem; */
-  /* width: 40%; */
   height: 30px;
 }
 
@@ -114,14 +79,13 @@
 
 .nav-item:hover {
   border-radius: 0;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid var(--color-text-primary);
 }
 
 .nav-item.active {
-  /* color: #b7d319; */
   background-color: var(--color-primary-medium);
   border-radius: 8px;
-  box-shadow: 0 0 8px 6px rgba(0, 0, 0, 0.582);
+  box-shadow: 0 0 8px 6px rgba(0, 0, 0, 0.58);
 }
 
 .nav-item.active:hover {
@@ -134,20 +98,15 @@
   width: 50%;
 }
 
-/* NAV - MOBILE */
 @media (max-width: 600px) {
+  .discord-button span {
+    display: none;
+  }
 
-
-
-    .discord-button span {
-        display: none;
-    }
-
-    .discord-button .icon {
-        margin-right: 0;
-        font-size: 1.4rem;
-    }
-
+  .discord-button .icon {
+    margin-right: 0;
+    font-size: 1.4rem;
+  }
 
   .nav-item span {
     display: none;
@@ -157,22 +116,8 @@
     display: block;
   }
 
-
   .logo-home {
     width: 96%;
     margin-top: 20px;
-}
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0turn);
-  }
-  100% {
-    transform: rotate(1turn);
   }
 }
-
-
-/* ########################## */
-

@@ -1,92 +1,77 @@
 .image-logo-container {
-    margin-top: 60px;
-    gap: 1rem;
-    min-width: 370px;
+  margin-top: 60px;
+  gap: 1rem;
+  min-width: 370px;
 }
 
 .image-logo-container .letter {
-    height: 68px;
-    margin: 0 3px;
-        transition: transform 0.2s ease;
-    cursor: pointer;
+  height: 68px;
+  margin: 0 3px;
+  transition: transform 0.2s ease;
+  cursor: pointer;
 }
 
 .image-logo-container .letter-J,
 .image-logo-container .letter-B {
-    /* margin-bottom: -14px; */
-    height: 82px;
+  height: 82px;
 }
 
 .image-logo-container .letter-O {
-    height: 102px;
-}
-
-@media (max-width:600px) {
-    .image-logo-container {
-        margin-top: 60px;
-        gap: .5rem;
-    }
-
-    .image-logo-container .letter {
-        height: 40px;
-        margin: 0 1px;
-            transition: transform 0.2s ease;
-        cursor: pointer;
-    }
-
-    .image-logo-container .letter-J,
-    .image-logo-container .letter-B {
-        /* margin-bottom: -14px; */
-        height: 55px;
-    }
-
-    .image-logo-container .letter-O {
-        height: 60px;
-    }
-}
-
-@keyframes wave3d {
-    0%, 100% {
-        transform: perspective(300px) scale(1) rotateX(0deg);
-    }
-    50% {
-        transform: perspective(300px) scale(1.2) rotateX(15deg);
-    }
-}
-
-@keyframes wave {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-5px);
-    }
+  height: 102px;
 }
 
 @media (max-width: 600px) {
-    .image-logo-container.animate .letter {
-        animation: wave 1.6s ease-in-out;
-    }
+  .image-logo-container {
+    margin-top: 60px;
+    gap: 0.5rem;
+  }
 
-    .image-logo-container.animate .letter-J { animation-delay: 0s; }
-    .image-logo-container.animate .letter-A { animation-delay: 0.1s; }
-    .image-logo-container.animate .letter-R { animation-delay: 0.2s; }
-    .image-logo-container.animate .letter-D { animation-delay: 0.3s; }
-    .image-logo-container.animate .letter-I { animation-delay: 0.4s; }
-    .image-logo-container.animate .letter-M { animation-delay: 0.5s; }
-    .image-logo-container.animate .letter-B { animation-delay: 0.6s; }
-    .image-logo-container.animate .letter-L { animation-delay: 0.7s; }
-    .image-logo-container.animate .letter-O { animation-delay: 0.8s; }
-    .image-logo-container.animate .letter-X { animation-delay: 0.9s; }
+  .image-logo-container .letter {
+    height: 40px;
+    margin: 0 1px;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+  }
+
+  .image-logo-container .letter-J,
+  .image-logo-container .letter-B {
+    height: 55px;
+  }
+
+  .image-logo-container .letter-O {
+    height: 60px;
+  }
+
+  .image-logo-container.animate .letter {
+    animation: wave 1.6s ease-in-out;
+  }
+
+  .image-logo-container.animate .letter-J { animation-delay: 0s; }
+  .image-logo-container.animate .letter-A { animation-delay: 0.1s; }
+  .image-logo-container.animate .letter-R { animation-delay: 0.2s; }
+  .image-logo-container.animate .letter-D { animation-delay: 0.3s; }
+  .image-logo-container.animate .letter-I { animation-delay: 0.4s; }
+  .image-logo-container.animate .letter-M { animation-delay: 0.5s; }
+  .image-logo-container.animate .letter-B { animation-delay: 0.6s; }
+  .image-logo-container.animate .letter-L { animation-delay: 0.7s; }
+  .image-logo-container.animate .letter-O { animation-delay: 0.8s; }
+  .image-logo-container.animate .letter-X { animation-delay: 0.9s; }
 }
 
-
+@keyframes wave3d {
+  0%, 100% {
+    transform: perspective(300px) scale(1) rotateX(0deg);
+  }
+  50% {
+    transform: perspective(300px) scale(1.2) rotateX(15deg);
+  }
+}
 
 @keyframes wave {
-    0%, 100% {
-
-    }
-    50% {
-        transform: translate3d(2ch, 0.2in, 1em);
-    }
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
 }
