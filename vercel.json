@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "api/*.js", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/api/mercadoPagoWebhook", "dest": "api/mercadoPagoWebhook.js" },
+    { "src": "/api/checkout", "dest": "api/checkout.js" }
+  ]
+}
