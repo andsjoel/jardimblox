@@ -249,7 +249,14 @@ const salvarCliente = async () => {
           <button onClick={aumentarQuantidade}><FaPlus /></button>
         </div>
 
-        <button onClick={() => setShowModal(true)} className="comprar-agora">Comprar Agora</button>
+    <button
+      onClick={() => setShowModal(true)}
+      className="comprar-agora"
+      disabled={produto.estoque === 0}
+      style={{ opacity: produto.estoque === 0 ? 0.5 : 1, cursor: produto.estoque === 0 ? 'not-allowed' : 'pointer' }}
+    >
+      {produto.estoque === 0 ? 'Indisponível' : 'Comprar Agora'}
+    </button>
     </div>
 
       {showModal && (
