@@ -6,6 +6,7 @@ import './modalcompra.css';  // Importe o CSS se necessário
 import { useEffect, useState } from 'react';
 
 const ModalCompra = ({
+  pedidoFinalizado,
   email,
   setEmail,
   nome,
@@ -26,7 +27,6 @@ const ModalCompra = ({
 }) => {
     const [isValid, setIsValid] = useState(false)
   
-  // Função para validar se os campos obrigatórios estão preenchidos e com formato correto
     useEffect(() => {
       const isNomeValid = nome.length >= 3;
       const isEmailValid = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(email);
@@ -41,7 +41,6 @@ const ModalCompra = ({
       }
     }, [nome, email, celular, isClienteExistente, isEmailPesquisado]);
 
-  // Função para validar e aceitar apenas letras no nome
   const handleNomeChange = (e) => {
     // Expressão regular que permite apenas letras e espaços
     const regex = /^[a-zA-ZÀ-ÿ\s]*$/; 
@@ -88,97 +87,110 @@ const ModalCompra = ({
         <div className='modal-header'>
           <button onClick={cancelar}><AiFillCloseCircle /></button>
         </div>
-        <h3>Confirmação do Pedido</h3>
 
-        {/* Campo de E-mail */}
-        {!isEmailPesquisado && (
+        {pedidoFinalizado ? (
+          <div className="modal-finalizado">
+            <h3>Você será redirecionado para o pagamento.</h3>
+            <p>Obrigado pela preferência!</p>
+            <button className='modal-confirm' onClick={() => window.location.href = '/'}>
+              Voltar ao Início
+            </button>
+          </div>
+        ) : (
           <>
-            <input
-              type="email"
-              placeholder="Digite seu e-mail"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-              required
-            />
-            <button className='modal-confirm' onClick={handleBuscarCliente}>Continuar</button>
-          </>
-        )}
+            <h3>Confirmação do Pedido</h3>
 
-        {/* Mensagem "Pesquisando..." enquanto busca os dados */}
-        {pesquisando && <h3>Pesquisando...</h3>}
-
-        {/* Mostrar o e-mail digitado após a pesquisa */}
-        {isEmailPesquisado && !pesquisando && (
-          <>
-            <input
-              type="text"
-              value={email}
-              readOnly
-              disabled
-            />
-            <h3>E-mail confirmado!</h3>
-          </>
-        )}
-
-        {/* Campos de Nome e Celular aparecem após o e-mail ser pesquisado */}
-        {isEmailPesquisado && (
-          <>
-            {isClienteExistente ? (
+            {/* Campo de E-mail */}
+            {!isEmailPesquisado && (
               <>
                 <input
-                  type="text"
-                  value={nome}
-                  disabled
-                />
-                <input
-                  type="text"
-                  value={celular}
-                  disabled
-                />
-              </>
-            ) : (
-              <>
-                <input
-                  type="text"
-                  placeholder="Digite seu nome"
-                  value={nome}
-                  onChange={handleNomeChange} // Atualiza nome com validação
+                  type="email"
+                  placeholder="Digite seu e-mail"
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
                   required
                 />
-                <input
-                  type="text"
-                  placeholder="Digite seu celular"
-                  value={celular}
-                  onChange={handleCelularChange} // Atualiza celular com formatação
-                  required
-                />
+                <button className='modal-confirm' onClick={handleBuscarCliente}>Continuar</button>
               </>
             )}
 
-            <div className="pedido-resumo-modal">
-              <p><strong>Resumo do Pedido:</strong></p>
-              <p>{quantidade}x {produto.nome}</p>
-              <p>Total: {new Intl.NumberFormat('pt-BR', {
-                style: 'currency',
-                currency: 'BRL',
-              }).format(precoTotal)}</p>
-            </div>
+            {/* Mensagem "Pesquisando..." enquanto busca os dados */}
+            {pesquisando && <h3>Pesquisando...</h3>}
 
-            <div className="modal-buttons">
-              {/* Desabilita o botão de "Confirmar" até que todos os campos estejam preenchidos e válidos */}
-              <button className='modal-confirm' onClick={salvarCliente} disabled={!isValid}>
-                {loading ? (
-                  <span className='spinner'></span>
+            {/* Mostrar o e-mail digitado após a pesquisa */}
+            {isEmailPesquisado && !pesquisando && (
+              <>
+                <input
+                  type="text"
+                  value={email}
+                  readOnly
+                  disabled
+                />
+                <h3>E-mail confirmado!</h3>
+              </>
+            )}
+
+            {/* Campos de Nome e Celular aparecem após o e-mail ser pesquisado */}
+            {isEmailPesquisado && (
+              <>
+                {isClienteExistente ? (
+                  <>
+                    <input
+                      type="text"
+                      value={nome}
+                      disabled
+                    />
+                    <input
+                      type="text"
+                      value={celular}
+                      disabled
+                    />
+                  </>
                 ) : (
-                  'Confirmar'
+                  <>
+                    <input
+                      type="text"
+                      placeholder="Digite seu nome"
+                      value={nome}
+                      onChange={handleNomeChange}
+                      required
+                    />
+                    <input
+                      type="text"
+                      placeholder="Digite seu celular"
+                      value={celular}
+                      onChange={handleCelularChange}
+                      required
+                    />
+                  </>
                 )}
-              </button>
-            </div>
+
+                <div className="pedido-resumo-modal">
+                  <p><strong>Resumo do Pedido:</strong></p>
+                  <p>{quantidade}x {produto.nome}</p>
+                  <p>Total: {new Intl.NumberFormat('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL',
+                  }).format(precoTotal)}</p>
+                </div>
+
+                <div className="modal-buttons">
+                  <button className='modal-confirm' onClick={salvarCliente} disabled={!isValid}>
+                    {loading ? (
+                      <span className='spinner'></span>
+                    ) : (
+                      'Confirmar'
+                    )}
+                  </button>
+                </div>
+              </>
+            )}
           </>
         )}
       </div>
     </div>
   );
+
 };
 
 export default ModalCompra;

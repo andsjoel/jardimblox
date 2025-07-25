@@ -6,27 +6,35 @@ mercadopago.configure({
 });
 
 const client = new Client();
+
 client
-  .setEndpoint(process.env.REACT_APP_APPWRITE_ENDPOINT)
-  .setProject(process.env.REACT_APP_PROJECT_ID)
-  .setKey(process.env.APPWRITE_API_KEY); // Você precisa criar essa variável no seu .env
+  .setEndpoint(process.env.APPWRITE_ENDPOINT)
+  .setProject(process.env.PROJECT_ID)
+  .setKey(process.env.APPWRITE_API_KEY); // ✅ Funciona com appwrite@18.1.1
 
 const database = new Databases(client);
 
-const DATABASE_ID = process.env.REACT_APP_DATABASE_ID;
-const PEDIDOS_COLLECTION_ID = process.env.REACT_APP_COLLECTION_PEDIDOS;
+const DATABASE_ID = process.env.DATABASE_ID;
+const PEDIDOS_COLLECTION_ID = process.env.COLLECTION_PEDIDOS;
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Método não permitido' });
   }
 
-  const paymentData = req.body;
+  let body = req.body;
+
+  if (!body || typeof body !== 'object') {
+    try {
+      body = JSON.parse(req.body);
+    } catch (e) {
+      return res.status(400).json({ error: 'JSON inválido' });
+    }
+  }
 
   try {
-    if (paymentData.type === 'payment') {
-      const paymentId = paymentData.data.id;
-
+    if (body.type === 'payment') {
+      const paymentId = body.data.id;
       const paymentResponse = await mercadopago.payment.findById(paymentId);
       const payment = paymentResponse.body;
 

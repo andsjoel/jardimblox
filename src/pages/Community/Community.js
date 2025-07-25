@@ -72,7 +72,7 @@ const Community = () => {
                                 <FaDiscord className="icon" />
                             </a>
                             <a
-                                href="https://instagram.com/sua_pagina"
+                                href="https://instagram.com/jardimblox"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="discord-button-comm"
@@ -80,7 +80,7 @@ const Community = () => {
                                 <FaInstagram className="icon" />
                             </a>
                             <a
-                                href="https://tiktok.com/@sua_pagina"
+                                href="https://tiktok.com/@jardimblox1"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="discord-button-comm"

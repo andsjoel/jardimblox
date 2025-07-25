@@ -22,11 +22,11 @@ const FooterComponent = () => {
                         <FaDiscord className="icon-footer" />
                         <span>Discord</span>
                     </a>
-                    <a href="https://instagram.com/sua_pagina" target="_blank" rel="noopener noreferrer">
+                    <a href="https://instagram.com/jardimblox" target="_blank" rel="noopener noreferrer">
                         <FaInstagram className="icon-footer" />
                         <span>Instagram</span>
                     </a>
-                    <a href="https://tiktok.com/@sua_pagina" target="_blank" rel="noopener noreferrer">
+                    <a href="https://tiktok.com/@jardimblox1" target="_blank" rel="noopener noreferrer">
                         <FaTiktok className="icon-footer" />
                         <span>TikTok</span>
                     </a>

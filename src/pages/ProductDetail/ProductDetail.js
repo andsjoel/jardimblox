@@ -23,7 +23,7 @@ const ProductDetail = () => {
   const [isEmailPesquisado, setIsEmailPesquisado] = useState(false); // Controla se o e-mail foi pesquisado
   const [loading, setLoading] = useState(false);
   const [clienteId, setClienteId] = useState(null);
-
+  const [pedidoFinalizado, setPedidoFinalizado] = useState(false);
 
   const DATABASE_ID = process.env.REACT_APP_DATABASE_ID;
   const PEDIDOS_COLLECTION_ID = process.env.REACT_APP_COLLECTION_PEDIDOS;
@@ -45,33 +45,36 @@ const ProductDetail = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
-const iniciarCheckoutMercadoPago = async (pedidoId) => {
-  
-  try {
-    const res = await fetch('/api/checkout', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        title: produto.nome,
-        quantity: quantidade,
-        price: produto.preco,
-        pedidoId: pedidoId,
-      }),
-    });
+  const iniciarCheckoutMercadoPago = async (pedidoId) => {
+    try {
+      const res = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          title: produto.nome,
+          quantity: quantidade,
+          price: produto.preco,
+          pedidoId: pedidoId,
+        }),
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    if (data.init_point) {
-      window.location.href = data.init_point; // redireciona para o checkout do Mercado Pago
-    } else {
-      console.error('Resposta inválida da API:', data);
+      if (data.init_point) {
+        window.open(data.init_point, '_blank'); // Abre em nova aba
+        setPedidoFinalizado(true); // Mostra mensagem no modal
+      } else {
+        console.error('Resposta inválida da API:', data);
+      }
+    } catch (error) {
+      console.error('Erro ao chamar API checkout:', error);
+    } finally {
+      setLoading(false);
     }
-  } catch (error) {
-    console.error('Erro ao chamar API checkout:', error);
-  }
-};
+  };
+
 
 
   // Função para buscar cliente por e-mail
@@ -161,6 +164,8 @@ const salvarCliente = async () => {
       );
 
       await iniciarCheckoutMercadoPago(resPedido.$id);
+      setPedidoFinalizado(true); // Exibe mensagem final no modal
+      setLoading(false);
     } else {
       console.log('Estoque insuficiente para completar o pedido.');
       return;
@@ -203,13 +208,14 @@ const salvarCliente = async () => {
 
   // Função para limpar os dados ao cancelar
   const cancelar = () => {
-    setEmail(''); // Limpa o e-mail
-    setNome(''); // Limpa o nome
-    setCelular(''); // Limpa o celular
-    setShowModal(false); // Fecha o modal
-    setIsEmailPesquisado(false); // Reseta o estado da pesquisa do e-mail
-    setIsClienteExistente(false); // Reseta a existência do cliente
-    setPesquisando(false); // Reseta o estado de pesquisa
+    setEmail('');
+    setNome('');
+    setCelular('');
+    setShowModal(false);
+    setIsEmailPesquisado(false);
+    setIsClienteExistente(false);
+    setPesquisando(false);
+    setPedidoFinalizado(false); // Reinicia estado final
   };
 
   // Se o produto não for encontrado ou estiver carregando
@@ -265,6 +271,7 @@ const salvarCliente = async () => {
           cancelar={cancelar}
           loading={loading}
           setLoading={setLoading}
+          pedidoFinalizado={pedidoFinalizado}
         />
       )}
     </div>
