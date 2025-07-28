@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { FaDiscord, FaStore, FaArrowLeft  } from 'react-icons/fa';
 import { AiFillHome } from 'react-icons/ai';
-import LogoSticker from '../../assets/logos/logo_sticker.svg'
 
 import './header.css';
 import { useNavigate } from 'react-router-dom';

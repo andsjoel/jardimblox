@@ -52,7 +52,7 @@ const Dados = () => {
       endpoint: APPWRITE_ENDPOINT,
       projectId: PROJECT_ID,
     });
-  }, []);
+  }, [APPWRITE_ENDPOINT, PROJECT_ID]); // Adicionando as variáveis como dependências
 
   if (!isAuthenticated) {
     return (
