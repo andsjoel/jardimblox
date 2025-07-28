@@ -8,7 +8,6 @@ import Painel from './pages/painel/Painel';
 import ProductDetail from './pages/ProductDetail/ProductDetail';
 import Community from './pages/Community/Community';
 import RetornoPagamento from './pages/retorno/RetornoPagamento';
-import Header from './components/header/Header';
 
 function App() {
   return (

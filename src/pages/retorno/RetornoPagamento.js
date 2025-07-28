@@ -1,6 +1,5 @@
 import { useParams } from 'react-router-dom';
 import { FaCheckCircle, FaTimesCircle, FaHourglassHalf, FaQuestionCircle } from 'react-icons/fa';
-import LogoContorno from '../../assets/logos/logo_sticker.svg';
 import './retorno.css'
 import Header from '../../components/header/Header';
 import ImageLogo from '../../components/img-logo/ImageLogo';
