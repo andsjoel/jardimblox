@@ -29,8 +29,6 @@ const Admin = () => {
   return (
     <div className="admin-container">
       <form className="admin-form" onSubmit={handleLogin}>
-        <h2>Área Administrativa</h2>
-
         <input
           type="email"
           placeholder="E-mail"

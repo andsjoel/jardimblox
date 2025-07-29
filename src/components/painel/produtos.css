@@ -127,7 +127,7 @@ textarea {
   margin-top: 1.5rem;
 }
 
-button[type="submit"] {
+.botao-wrapper button[type="submit"] {
   background-color: #28a745;
   color: white;
   padding: 0.8rem 2rem;

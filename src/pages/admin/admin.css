@@ -8,7 +8,6 @@
 }
 
 .admin-form {
-  background-color: #000000cc;
   border-radius: 12px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
   width: 100%;
@@ -17,6 +16,7 @@
   flex-direction: column;
   gap: 1.5rem;
   color: white;
+  padding: 2rem;
 }
 
 .admin-form h2 {
@@ -47,6 +47,7 @@
 }
 
 .admin-form button {
+  background-color: #28a745;
   padding: 0.9rem;
   color: white;
   font-weight: 700;
