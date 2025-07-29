@@ -41,16 +41,13 @@
 
 .lista-produtos-store {
   display: flex;
-  /* grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); */
   gap: 1rem;
-  justify-content: center; /* Centraliza os itens */
-  justify-items: center;   /* Centraliza conteúdo de cada célula */
+  justify-content: center;
+  justify-items: center;
   flex-wrap: wrap;
   max-width: 1180px;
-  /* padding: 0 10%; */
-  margin: 0 auto;           /* Centraliza o grid dentro do container pai */
-  /* margin-top: 30px; */
-  /* padding: 2rem 1rem; */
+  margin: 0 auto;
+  height: 100vh;
 }
 
 /* Animação de movimento da linha */
